@@ -59,4 +59,5 @@ plugins:
   - jekyll-seo-tag
 #  - jekyll-feed
 
-baseurl:  "/blog"
+baseurl:  #"/blog"
+repository: "redsnow78/redsnow78.github.com"
