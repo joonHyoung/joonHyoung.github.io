@@ -58,3 +58,5 @@ theme: plainwhite
 plugins:
   - jekyll-seo-tag
 #  - jekyll-feed
+
+baseurl:  "/blog"
