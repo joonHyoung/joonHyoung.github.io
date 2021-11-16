@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "ahaha"
+date:   2021-11-16 21:03:36 +0530
+categories: Swift
+---
+
 ```swift
 func sceneDidEnterBackground(_ scene: UIScene) {
         // Called as the scene transitions from the foreground to the background.
