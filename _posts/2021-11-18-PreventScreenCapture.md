@@ -62,14 +62,13 @@ override func viewDidLoad() {
 
 이렇게 적용하고 나면, 사용자가 스크린 캡처시에 캡처되지 않을 부분을 설정 할 수 있습니다. 
 
-[GitHub Source]: https://github.com/joonHyoung/preventScreenCapture
+[Github 소스](https://github.com/joonHyoung/preventScreenCapture)
 
 
 
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809380969362850"
      crossorigin="anonymous"></script>
-
 <!-- 블로그 -->
 <ins class="adsbygoogle"
      style="display:block"
