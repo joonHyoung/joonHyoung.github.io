@@ -11,7 +11,7 @@ tag:
   - "iOS"
   - "Prevent Screen Capture"
   - "캡처방지"
-toc: true
+toc: false
 last_modified_at: 2021-11-18
 comments: true
 mathjax: true
