@@ -50,6 +50,16 @@ extension NSString {
 }
 ```
 
+위와 같이 swizzle 관련 extension 을 구현 후,  AppDelegate 의 application 등의 적절한 위치에서 호출을 하여 줍니다.
+
+```swift
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Override point for customization after application launch.
+  NSString.swizzleReplacingCharacters()
+  return true
+}
+```
+
 
 
 
