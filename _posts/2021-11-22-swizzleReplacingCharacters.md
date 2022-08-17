@@ -17,7 +17,7 @@ comments: true
 mathjax: true
 ---
 
-아이폰(iOS)에서 인증번호를 자동입력? 할 때, 아래 이미지처럼 빨간색 네모를 터치 시에 앱이 크래쉬 나는 현상이 있습니다. 
+아이폰(iOS)에서 인증번호를 자동입력? 할 때, 아래 이미지처럼 빨간색 네모를 터치 시에 앱이 크래쉬 나는 현상이 있습니다.   
 
 <img src="https://user-images.githubusercontent.com/1383686/142784450-9ae31a46-f257-4af5-8551-f519f8626c64.PNG" style="zoom:50%;" />
 
