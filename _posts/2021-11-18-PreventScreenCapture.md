@@ -2,8 +2,6 @@
 title: "iOS 캡처 방지 TIP!"
 strapline: "Swift"
 description: "iOS 캡처방지"
-header:
- overlay_image: /assets/images/triangular.jpeg
 categories:
   - "Swift"
 tag:
