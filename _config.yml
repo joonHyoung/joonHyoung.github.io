@@ -16,11 +16,11 @@ minimal_mistakes_skin    : "air" # "air", "aqua", "contrast", "dark", "dirt", "n
 
 # Site Settings
 locale                   : "ko"
-title                    : "Redsnow's Swift Blog"
+title                    : "Redsnow's Anything Blog"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "JoonHyoung Lee"
-description              : "Swift에 관한 개인블로그 입니다."
+description              : "아무거나에 대한 개인블로그 입니다."
 url                      : "https://joonhyoung.github.io" # the base hostname & protocol for your site e.g. "https://joonhyoung.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "joonHyoung/joonhyoung.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -104,7 +104,7 @@ analytics:
 author:
   name             : "이준형"
   avatar           : "/assets/images/1383686.jpeg"# path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "노력하는 iOS 개발자 입니다."
+  bio              : "노력하는 모바일 개발자 입니다."
   location         : "서울 인천"
   email            : "redsnow78@gmail.com"
   links:
