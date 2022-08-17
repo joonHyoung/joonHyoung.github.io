@@ -2,8 +2,6 @@
 title: "iOS에서 인증번호 자동입력할 때 빈칸 클릭 때 크래쉬나는 문제 해결(NSTaggedPointerString Crash)"
 strapline: "Swift"
 description: "iOS에서 인증번호 자동입력할 때 빈칸 클릭 때 크래쉬나는 문제 해결(NSTaggedPointerString Crash)"
-header:
- overlay_image: /assets/images/triangular.jpeg
 categories:
   - "Swift"
 tag:
