@@ -1,0 +1,662 @@
+{
+  "Id": "a948987c41f54a268f429770b36acd41",
+  "RecognitionStatus": "Success",
+  "Offset": 12700000,
+  "Duration": 156900000,
+  "Channel": 0,
+  "DisplayText": "尽管吃了不少苦，但是那段时光最终成为了难以忘记的美好苦。",
+  "SNR": 22.823198,
+  "NBest": [
+    {
+      "Confidence": 0.9022796,
+      "Lexical": "尽管 吃 了 不少 苦 但是 那 段 时光 最终 成为 了 难以 忘记 的 美好 苦",
+      "ITN": "尽管 吃 了 不少 苦 但是 那 段 时光 最终 成为 了 难以 忘记 的 美好 苦",
+      "MaskedITN": "尽管吃了不少苦但是那段时光最终成为了难以忘记的美好苦",
+      "Display": "尽管吃了不少苦，但是那段时光最终成为了难以忘记的美好苦。",
+      "PronunciationAssessment": {
+        "AccuracyScore": 64,
+        "FluencyScore": 84,
+        "CompletenessScore": 71,
+        "PronScore": 69.4
+      },
+      "Words": [
+        {
+          "Word": "尽管",
+          "Offset": 12700000,
+          "Duration": 9700000,
+          "PronunciationAssessment": {
+            "AccuracyScore": 65,
+            "ErrorType": "None"
+          },
+          "Syllables": [
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 50
+              },
+              "Offset": 12700000,
+              "Duration": 5100000
+            },
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 82
+              },
+              "Offset": 17900000,
+              "Duration": 4500000
+            }
+          ],
+          "Phonemes": [
+            {
+              "Phoneme": "jin 2",
+              "PronunciationAssessment": {
+                "AccuracyScore": 50
+              },
+              "Offset": 12700000,
+              "Duration": 5100000
+            },
+            {
+              "Phoneme": "guan 3",
+              "PronunciationAssessment": {
+                "AccuracyScore": 82
+              },
+              "Offset": 17900000,
+              "Duration": 4500000
+            }
+          ]
+        },
+        {
+          "Word": "吃",
+          "Offset": 22700000,
+          "Duration": 2900000,
+          "PronunciationAssessment": {
+            "AccuracyScore": 26,
+            "ErrorType": "Mispronunciation"
+          },
+          "Syllables": [
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 26
+              },
+              "Offset": 22700000,
+              "Duration": 2900000
+            }
+          ],
+          "Phonemes": [
+            {
+              "Phoneme": "chi 1",
+              "PronunciationAssessment": {
+                "AccuracyScore": 26
+              },
+              "Offset": 22700000,
+              "Duration": 2900000
+            }
+          ]
+        },
+        {
+          "Word": "了",
+          "Offset": 25700000,
+          "Duration": 5200000,
+          "PronunciationAssessment": {
+            "AccuracyScore": 49,
+            "ErrorType": "None"
+          },
+          "Syllables": [
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 69
+              },
+              "Offset": 25700000,
+              "Duration": 5200000
+            }
+          ],
+          "Phonemes": [
+            {
+              "Phoneme": "le 5",
+              "PronunciationAssessment": {
+                "AccuracyScore": 69
+              },
+              "Offset": 25700000,
+              "Duration": 5200000
+            }
+          ]
+        },
+        {
+          "Word": "不少",
+          "Offset": 34700000,
+          "Duration": 10700000,
+          "PronunciationAssessment": {
+            "AccuracyScore": 68,
+            "ErrorType": "None"
+          },
+          "Syllables": [
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 93
+              },
+              "Offset": 34700000,
+              "Duration": 10700000
+            }
+          ],
+          "Phonemes": [
+            {
+              "Phoneme": "bu 4",
+              "PronunciationAssessment": {
+                "AccuracyScore": 82
+              },
+              "Offset": 34700000,
+              "Duration": 6300000
+            },
+            {
+              "Phoneme": "shao 3",
+              "PronunciationAssessment": {
+                "AccuracyScore": 47
+              },
+              "Offset": 41100000,
+              "Duration": 4300000
+            }
+          ]
+        },
+        {
+          "Word": "苦",
+          "Offset": 45500000,
+          "Duration": 5600000,
+          "PronunciationAssessment": {
+            "AccuracyScore": 16,
+            "ErrorType": "Mispronunciation"
+          },
+          "Syllables": [
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 16
+              },
+              "Offset": 45500000,
+              "Duration": 5600000
+            }
+          ],
+          "Phonemes": [
+            {
+              "Phoneme": "ku 3",
+              "PronunciationAssessment": {
+                "AccuracyScore": 16
+              },
+              "Offset": 45500000,
+              "Duration": 5600000
+            }
+          ]
+        },
+        {
+          "Word": "但是",
+          "Offset": 54100000,
+          "Duration": 10400000,
+          "PronunciationAssessment": {
+            "AccuracyScore": 77,
+            "ErrorType": "None"
+          },
+          "Syllables": [
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 91
+              },
+              "Offset": 54100000,
+              "Duration": 4100000
+            },
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 67
+              },
+              "Offset": 58300000,
+              "Duration": 6200000
+            }
+          ],
+          "Phonemes": [
+            {
+              "Phoneme": "dan 4",
+              "PronunciationAssessment": {
+                "AccuracyScore": 91
+              },
+              "Offset": 54100000,
+              "Duration": 4100000
+            },
+            {
+              "Phoneme": "shi 4",
+              "PronunciationAssessment": {
+                "AccuracyScore": 67
+              },
+              "Offset": 58300000,
+              "Duration": 6200000
+            }
+          ]
+        },
+        {
+          "Word": "那",
+          "Offset": 66600000,
+          "Duration": 5000000,
+          "PronunciationAssessment": {
+            "AccuracyScore": 79,
+            "ErrorType": "None"
+          },
+          "Syllables": [
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 79
+              },
+              "Offset": 66600000,
+              "Duration": 5000000
+            }
+          ],
+          "Phonemes": [
+            {
+              "Phoneme": "na 1",
+              "PronunciationAssessment": {
+                "AccuracyScore": 79
+              },
+              "Offset": 66600000,
+              "Duration": 5000000
+            }
+          ]
+        },
+        {
+          "Word": "段",
+          "Offset": 71700000,
+          "Duration": 6300000,
+          "PronunciationAssessment": {
+            "AccuracyScore": 91,
+            "ErrorType": "None"
+          },
+          "Syllables": [
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 91
+              },
+              "Offset": 71700000,
+              "Duration": 6300000
+            }
+          ],
+          "Phonemes": [
+            {
+              "Phoneme": "duan 4",
+              "PronunciationAssessment": {
+                "AccuracyScore": 91
+              },
+              "Offset": 71700000,
+              "Duration": 6300000
+            }
+          ]
+        },
+        {
+          "Word": "时光",
+          "Offset": 78100000,
+          "Duration": 10800000,
+          "PronunciationAssessment": {
+            "AccuracyScore": 84,
+            "ErrorType": "None"
+          },
+          "Syllables": [
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 88
+              },
+              "Offset": 78100000,
+              "Duration": 4100000
+            },
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 82
+              },
+              "Offset": 82300000,
+              "Duration": 6600000
+            }
+          ],
+          "Phonemes": [
+            {
+              "Phoneme": "shi 2",
+              "PronunciationAssessment": {
+                "AccuracyScore": 88
+              },
+              "Offset": 78100000,
+              "Duration": 4100000
+            },
+            {
+              "Phoneme": "guang 1",
+              "PronunciationAssessment": {
+                "AccuracyScore": 82
+              },
+              "Offset": 82300000,
+              "Duration": 6600000
+            }
+          ]
+        },
+        {
+          "Word": "最终",
+          "Offset": 92600000,
+          "Duration": 11500000,
+          "PronunciationAssessment": {
+            "AccuracyScore": 58,
+            "ErrorType": "Mispronunciation"
+          },
+          "Syllables": [
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 65
+              },
+              "Offset": 92600000,
+              "Duration": 6000000
+            },
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 51
+              },
+              "Offset": 98700000,
+              "Duration": 5400000
+            }
+          ],
+          "Phonemes": [
+            {
+              "Phoneme": "zui 4",
+              "PronunciationAssessment": {
+                "AccuracyScore": 65
+              },
+              "Offset": 92600000,
+              "Duration": 6000000
+            },
+            {
+              "Phoneme": "zhong 1",
+              "PronunciationAssessment": {
+                "AccuracyScore": 51
+              },
+              "Offset": 98700000,
+              "Duration": 5400000
+            }
+          ]
+        },
+        {
+          "Word": "成为",
+          "Offset": 104400000,
+          "Duration": 8000000,
+          "PronunciationAssessment": {
+            "AccuracyScore": 77,
+            "ErrorType": "None"
+          },
+          "Syllables": [
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 62
+              },
+              "Offset": 104400000,
+              "Duration": 3800000
+            },
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 91
+              },
+              "Offset": 108300000,
+              "Duration": 4100000
+            }
+          ],
+          "Phonemes": [
+            {
+              "Phoneme": "cheng 2",
+              "PronunciationAssessment": {
+                "AccuracyScore": 62
+              },
+              "Offset": 104400000,
+              "Duration": 3800000
+            },
+            {
+              "Phoneme": "wei 2",
+              "PronunciationAssessment": {
+                "AccuracyScore": 91
+              },
+              "Offset": 108300000,
+              "Duration": 4100000
+            }
+          ]
+        },
+        {
+          "Word": "了",
+          "Offset": 112500000,
+          "Duration": 5000000,
+          "PronunciationAssessment": {
+            "AccuracyScore": 29,
+            "ErrorType": "None"
+          },
+          "Syllables": [
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 73
+              },
+              "Offset": 112500000,
+              "Duration": 5000000
+            }
+          ],
+          "Phonemes": [
+            {
+              "Phoneme": "le 5",
+              "PronunciationAssessment": {
+                "AccuracyScore": 73
+              },
+              "Offset": 112500000,
+              "Duration": 5000000
+            }
+          ]
+        },
+        {
+          "Word": "难以",
+          "Offset": 117800000,
+          "Duration": 16000000,
+          "PronunciationAssessment": {
+            "AccuracyScore": 50,
+            "ErrorType": "Mispronunciation"
+          },
+          "Syllables": [
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 53
+              },
+              "Offset": 117800000,
+              "Duration": 7600000
+            },
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 47
+              },
+              "Offset": 125500000,
+              "Duration": 8300000
+            }
+          ],
+          "Phonemes": [
+            {
+              "Phoneme": "nan 2",
+              "PronunciationAssessment": {
+                "AccuracyScore": 53
+              },
+              "Offset": 117800000,
+              "Duration": 7600000
+            },
+            {
+              "Phoneme": "yi 3",
+              "PronunciationAssessment": {
+                "AccuracyScore": 47
+              },
+              "Offset": 125500000,
+              "Duration": 8300000
+            }
+          ]
+        },
+        {
+          "Word": "忘记",
+          "Offset": 140600000,
+          "Duration": 8600000,
+          "PronunciationAssessment": {
+            "AccuracyScore": 98,
+            "ErrorType": "None"
+          },
+          "Syllables": [
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 97
+              },
+              "Offset": 140600000,
+              "Duration": 5600000
+            },
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 100
+              },
+              "Offset": 146300000,
+              "Duration": 2900000
+            }
+          ],
+          "Phonemes": [
+            {
+              "Phoneme": "wang 4",
+              "PronunciationAssessment": {
+                "AccuracyScore": 97
+              },
+              "Offset": 140600000,
+              "Duration": 5600000
+            },
+            {
+              "Phoneme": "ji 4",
+              "PronunciationAssessment": {
+                "AccuracyScore": 100
+              },
+              "Offset": 146300000,
+              "Duration": 2900000
+            }
+          ]
+        },
+        {
+          "Word": "的",
+          "Offset": 149300000,
+          "Duration": 3500000,
+          "PronunciationAssessment": {
+            "AccuracyScore": 91,
+            "ErrorType": "None"
+          },
+          "Syllables": [
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 91
+              },
+              "Offset": 149300000,
+              "Duration": 3500000
+            }
+          ],
+          "Phonemes": [
+            {
+              "Phoneme": "de 5",
+              "PronunciationAssessment": {
+                "AccuracyScore": 91
+              },
+              "Offset": 149300000,
+              "Duration": 3500000
+            }
+          ]
+        },
+        {
+          "Word": "美好",
+          "Offset": 152900000,
+          "Duration": 11600000,
+          "PronunciationAssessment": {
+            "AccuracyScore": 74,
+            "ErrorType": "None"
+          },
+          "Syllables": [
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 70
+              },
+              "Offset": 152900000,
+              "Duration": 3700000
+            },
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 76
+              },
+              "Offset": 156700000,
+              "Duration": 7800000
+            }
+          ],
+          "Phonemes": [
+            {
+              "Phoneme": "mei 2",
+              "PronunciationAssessment": {
+                "AccuracyScore": 70
+              },
+              "Offset": 152900000,
+              "Duration": 3700000
+            },
+            {
+              "Phoneme": "hao 3",
+              "PronunciationAssessment": {
+                "AccuracyScore": 76
+              },
+              "Offset": 156700000,
+              "Duration": 7800000
+            }
+          ]
+        },
+        {
+          "Word": "苦",
+          "Offset": 166900000,
+          "Duration": 2700000,
+          "PronunciationAssessment": {
+            "AccuracyScore": 14,
+            "ErrorType": "Insertion"
+          },
+          "Syllables": [
+            {
+              "Syllable": "",
+              "PronunciationAssessment": {
+                "AccuracyScore": 14
+              },
+              "Offset": 166900000,
+              "Duration": 2700000
+            }
+          ],
+          "Phonemes": [
+            {
+              "Phoneme": "ku 3",
+              "PronunciationAssessment": {
+                "AccuracyScore": 14
+              },
+              "Offset": 166900000,
+              "Duration": 2700000
+            }
+          ]
+        },
+        {
+          "Word": "回忆",
+          "PronunciationAssessment": {
+            "ErrorType": "Omission"
+          },
+          "Phonemes": []
+        }
+      ]
+    }
+  ]
+}
