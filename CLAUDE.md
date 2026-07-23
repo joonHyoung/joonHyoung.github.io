@@ -37,7 +37,11 @@ There is no lint step and no site-level test suite — the `test/` directory bel
 
 ## Key configuration facts
 
-- Theme is set two ways in `_config.yml`: `theme: minimal-mistakes-jekyll` (the local gem, used by `bundle exec jekyll serve`) and `remote_theme: mmistakes/minimal-mistakes` (for GitHub Pages remote-theme builds). Keep them in sync; do not reintroduce any other `theme:` key.
+- **Deployment: default (legacy) GitHub Pages Jekyll build** — there is no `.github/workflows/`, so GitHub builds the site in `--safe` mode with only whitelisted plugins/themes. Confirm build status at https://github.com/joonHyoung/joonHyoung.github.io/actions (runs named "pages build and deployment").
+- Theme config in `_config.yml` is deliberately layered and **must not be "cleaned up"**:
+  - `remote_theme: mmistakes/minimal-mistakes` — provides the actual site appearance (jekyll-remote-theme is auto-enabled on GitHub Pages).
+  - `theme: minimal-mistakes-jekyll` — the local gem, used only by `bundle exec jekyll serve`.
+  - `theme: jekyll-theme-hacker` (last line) — **load-bearing.** The safe Pages build rejects any `theme:` not on GitHub's supported-theme whitelist; `minimal-mistakes-jekyll` is NOT on it, but `jekyll-theme-hacker` IS. This trailing line overrides the gem `theme:` so the build passes. Removing it breaks the Pages build (verified 2026-07-23). The proper long-term fix is a GitHub Actions workflow that runs `bundle exec jekyll build`, which would let `theme: minimal-mistakes-jekyll` work directly and make this hack unnecessary.
 - The home page is `index.html` (`layout: home`, `author_profile: true`). Previously duplicated as `index.md`/`index.markdown` — keep a single index file.
 - Comments: Disqus (`joonhyoung-github-io`). Search: lunr with full-content indexing. Analytics: Google gtag (`G-R6WK8J8QD8`).
 - Site skin is `air` (`minimal_mistakes_skin`); customize styling under `_sass/`.
