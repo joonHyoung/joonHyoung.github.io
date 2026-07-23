@@ -1,0 +1,15 @@
+# CI-only Gemfile for the GitHub Actions Pages build (.github/workflows/pages.yml).
+#
+# This mirrors GitHub Pages' own legacy build environment: the `github-pages`
+# metagem bundles the supported themes (incl. jekyll-theme-hacker),
+# jekyll-remote-theme, and every whitelisted plugin. The site therefore builds
+# exactly as it did on the legacy builder — but now under our control, with full
+# logs and the ability to add non-whitelisted plugins later.
+#
+# Local development still uses the root ./Gemfile; this file is only referenced
+# by the workflow via BUNDLE_GEMFILE.
+source "https://rubygems.org"
+
+gem "github-pages", group: :jekyll_plugins
+gem "jekyll-include-cache", group: :jekyll_plugins
+gem "webrick"

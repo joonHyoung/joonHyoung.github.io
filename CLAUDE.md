@@ -37,7 +37,8 @@ There is no lint step and no site-level test suite — the `test/` directory bel
 
 ## Key configuration facts
 
-- **Deployment: default (legacy) GitHub Pages Jekyll build** — there is no `.github/workflows/`, so GitHub builds the site in `--safe` mode with only whitelisted plugins/themes. Confirm build status at https://github.com/joonHyoung/joonHyoung.github.io/actions (runs named "pages build and deployment").
+- **Deployment: GitHub Actions** (`.github/workflows/pages.yml`) — builds with Bundler using the CI-only `.github/Gemfile` (the `github-pages` metagem) and deploys via `actions/deploy-pages`. This requires **Settings → Pages → Build and deployment → Source = "GitHub Actions"**; if that setting is ever reset to "Deploy from a branch", the workflow's deploy step will fail. The CI Gemfile is separate from the root `Gemfile` (which is what local `bundle exec jekyll serve` uses). Confirm build status at https://github.com/joonHyoung/joonHyoung.github.io/actions.
+- Historical note: before the Actions workflow, the site used the default (legacy) `--safe` Pages build, which only accepts whitelisted themes — that is why the `theme: jekyll-theme-hacker` hack below existed. With the Actions build it is no longer strictly required, but it is kept for safety and does no harm.
 - Theme config in `_config.yml` is deliberately layered and **must not be "cleaned up"**:
   - `remote_theme: mmistakes/minimal-mistakes` — provides the actual site appearance (jekyll-remote-theme is auto-enabled on GitHub Pages).
   - `theme: minimal-mistakes-jekyll` — the local gem, used only by `bundle exec jekyll serve`.
