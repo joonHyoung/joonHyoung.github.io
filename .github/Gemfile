@@ -10,6 +10,11 @@
 # by the workflow via BUNDLE_GEMFILE.
 source "https://rubygems.org"
 
+# 주의: jekyll-include-cache 를 여기에 따로 적지 마세요.
+# github-pages 메타젬이 이미 (특정 버전으로 고정해서) 포함합니다. 별도로 적으면
+# Bundler 가 최신 jekyll-include-cache(0.2.2)를 고르려고 github-pages 를 222 로
+# 낮추고, 그 결과 jekyll 3.9.0 + liquid 4.0.3 이 설치됩니다. liquid 4.0.3 은
+# Ruby 3.2 에서 제거된 Object#tainted? 를 호출하므로 ruby-version: "3.3" 빌드가
+# `undefined method 'tainted?' for nil` 로 실패합니다.
 gem "github-pages", group: :jekyll_plugins
-gem "jekyll-include-cache", group: :jekyll_plugins
 gem "webrick"
