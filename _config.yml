@@ -293,7 +293,9 @@ defaults:
       comments: true
       share: true
       related: true
-      
+      sidebar:
+        nav: "sidebar-categories"
+
   # _pages
   - scope:
       path: ""
@@ -301,6 +303,8 @@ defaults:
     values:
       layout: single
       author_profile: true
+      sidebar:
+        nav: "sidebar-categories"
 
 # DO NOT REMOVE — required for the default (legacy) GitHub Pages build.
 # The actual site appearance comes from `remote_theme` above; this `theme`

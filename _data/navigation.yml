@@ -14,3 +14,22 @@ main:
     url: /privacy/
   # - title: "Sitemap"
   #   url: /sitemap/
+
+# 사이드바: 카테고리 탐색
+sidebar-categories:
+  - title: "카테고리"
+    children:
+      - title: "AI"
+        url: /categories/#AI
+      - title: "Apple"
+        url: /categories/#Apple
+      - title: "Swift"
+        url: /categories/#Swift
+  - title: "모아보기"
+    children:
+      - title: "전체 카테고리"
+        url: /categories/
+      - title: "연도별"
+        url: /year-archive/
+      - title: "태그"
+        url: /tags/
