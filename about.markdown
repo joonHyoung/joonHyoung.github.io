@@ -2,7 +2,7 @@
 layout: single
 title: About
 permalink: /about/
-author_profile: true
+author_profile: false
 ---
 
 안녕하세요, **Redsnow's Anything Blog**를 운영하는 이준형입니다.
