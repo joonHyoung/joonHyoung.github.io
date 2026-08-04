@@ -1,4 +1,7 @@
 ---
+header:
+  image: /assets/images/posts/ai-20260724.png
+  teaser: /assets/images/posts/ai-20260724.png
 title: "오늘의 AI 뉴스: 수학 난제 푼 '탈옥' 모델과 미·중 AI 전쟁"
 strapline: "AI"
 description: "2026년 7월 24일 기준 가장 뜨거운 AI 뉴스 톱픽 — OpenAI 미공개 모델의 사고, 미·중 모델 증류 공방, 앤트로픽 J-space, 제미나이 개편까지"

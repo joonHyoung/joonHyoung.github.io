@@ -1,4 +1,7 @@
 ---
+header:
+  image: /assets/images/posts/swift-capture.png
+  teaser: /assets/images/posts/swift-capture.png
 title: "iOS 캡처 방지 TIP!"
 strapline: "Swift"
 description: "iOS 캡처방지"
