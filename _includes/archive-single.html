@@ -1,30 +1,28 @@
-{% if post.header.teaser %}
-  {% capture teaser %}{{ post.header.teaser }}{% endcapture %}
-{% else %}
-  {% assign teaser = site.teaser %}
-{% endif %}
+{% comment %}
+  Terminal Log — DATE / CAT / TITLE / READ 4열 로그 행
+  홈(_layouts/home.html)과 아카이브(_layouts/archive.html 계열)에서 공통 사용
+{% endcomment %}
 
-{% if post.id %}
-  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
-{% else %}
-  {% assign title = post.title %}
-{% endif %}
+{% assign post_url = post.link | default: post.url %}
+{% assign post_cat = post.categories | first | default: "log" | downcase %}
+{% assign words_per_minute = site.words_per_minute | default: 200 %}
+{% assign words = post.content | strip_html | number_of_words %}
 
-<div class="{{ include.type | default: 'list' }}__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    {% if include.type == "grid" and teaser %}
-      <div class="archive__item-teaser">
-        <img src="{{ teaser | relative_url }}" alt="">
-      </div>
+<a class="log-list__row" href="{{ post_url | relative_url }}" rel="permalink">
+  <span class="log-list__date">{{ post.date | date: "%Y-%m-%d" }}</span>
+  <span class="log-list__cat">{{ post_cat }}</span>
+  <span class="log-list__body">
+    <span class="log-list__title">{{ post.title | markdownify | remove: "<p>" | remove: "</p>" }}</span>
+    {% if post.excerpt %}
+      <span class="log-list__excerpt">{{ post.excerpt | markdownify | strip_html | truncate: 140 }}</span>
     {% endif %}
-    <h2 class="archive__item-title no_toc" itemprop="headline">
-      {% if post.link %}
-        <a href="{{ post.link }}">{{ title }}</a> <a href="{{ post.url | relative_url }}" rel="permalink"><i class="fas fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
-      {% else %}
-        <a href="{{ post.url | relative_url }}" rel="permalink">{{ title }}</a>
-      {% endif %}
-    </h2>
-    {% include page__meta.html type=include.type %}
-    {% if post.excerpt %}<p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>{% endif %}
-  </article>
-</div>
+    {% if post.tags.size > 0 %}
+      <span class="log-list__tags">{% for t in post.tags %}#{{ t }} {% endfor %}</span>
+    {% endif %}
+  </span>
+  <span class="log-list__read">
+    {% if post.read_time != false %}
+      {% if words < words_per_minute %}1분{% else %}{{ words | divided_by: words_per_minute }}분{% endif %}
+    {% endif %}
+  </span>
+</a>

@@ -1,0 +1,29 @@
+# _config.yml 수정 항목 (현재 저장소 값 기준으로 이 두 군데만 바꾸면 됩니다)
+
+# 1) 스킨 교체 — 기존: "dark"
+minimal_mistakes_skin    : "terminal"
+
+# 2) 포스트 defaults 에 목차·프로필 추가 (기존 블록 교체)
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true      # 기존 false → 시안의 WHOAMI 영역
+      read_time: true
+      comments: true
+      share: true
+      related: true
+      toc: true                 # 추가 — 시안의 ON THIS PAGE
+      toc_sticky: true          # 추가
+      toc_label: "ON THIS PAGE" # 추가
+      sidebar:
+        nav: "sidebar-categories"
+
+  # _pages 는 그대로 유지
+
+# 이미 켜져 있어 손대지 않아도 되는 것: search(lunr), search_full_content,
+# read_time, words_per_minute(200), category/tag/year archive, excerpt_separator
+# 그대로 두어야 하는 것: remote_theme, theme: jekyll-theme-hacker (Pages 빌드용)
