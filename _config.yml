@@ -18,13 +18,13 @@ minimal_mistakes_skin    : "air" # "air", "aqua", "contrast", "dark", "dirt", "n
 locale                   : "ko"
 title                    : "Redsnow's Anything Blog"
 title_separator          : "-"
-subtitle                 : # site tagline that appears below site title in masthead
+subtitle                 : "iOS · AI · 개발 노트" # site tagline that appears below site title in masthead
 name                     : "JoonHyoung Lee"
-description              : "아무거나에 대한 개인블로그 입니다."
+description              : "iOS·모바일 앱 개발, AI 소식, 개발 트러블슈팅과 배운 것들을 기록하는 개발 블로그입니다."
 url                      : "https://joonhyoung.github.io" # the base hostname & protocol for your site e.g. "https://joonhyoung.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "joonHyoung/joonHyoung.github.io" # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
-teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
+teaser                   : "/assets/images/og-default.png" # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 # breadcrumbs            : false # true, false (default)
