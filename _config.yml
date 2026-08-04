@@ -220,7 +220,8 @@ sass:
 permalink: /:categories/:title/
 paginate: 5 # amount of posts to show
 paginate_path: /page:num/
-timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone: Asia/Seoul # 새벽 5시 KST 자동 발행 글이 UTC 기준 '미래 글'로 숨겨지지 않도록 KST 고정
+future: true # 타임존 경계에서 당일 글이 누락되지 않도록 미래 날짜 글도 빌드에 포함
 
 
 # Plugins (previously gems:)
