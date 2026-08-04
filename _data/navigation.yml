@@ -20,11 +20,11 @@ sidebar-categories:
   - title: "카테고리"
     children:
       - title: "AI"
-        url: /categories/#AI
+        url: /categories/#ai
       - title: "Apple"
-        url: /categories/#Apple
+        url: /categories/#apple
       - title: "Swift"
-        url: /categories/#Swift
+        url: /categories/#swift
   - title: "모아보기"
     children:
       - title: "전체 카테고리"
