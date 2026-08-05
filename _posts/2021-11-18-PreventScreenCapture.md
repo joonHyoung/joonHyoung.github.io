@@ -3,6 +3,7 @@ header:
   image: /assets/images/posts/swift-capture.png
   teaser: /assets/images/posts/swift-capture.png
 title: "iOS 캡처 방지 TIP!"
+series: "iOS 트러블슈팅"
 strapline: "Swift"
 description: "iOS 캡처방지"
 categories:
