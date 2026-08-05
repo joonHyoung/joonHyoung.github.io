@@ -19,7 +19,9 @@
       <div class="tlog__label">SERIES</div>
       {% for s in include.series_names %}
         {% assign s_posts = site.posts | where: "series", s %}
-        <a class="tlog__rail-item" href="{{ s_posts.last.url | relative_url }}">
+        {% comment %} 시리즈 링크는 최신편으로 — site.posts 정렬에 의존하지 않도록 날짜로 명시 정렬 {% endcomment %}
+        {% assign s_latest = s_posts | sort: "date" | last %}
+        <a class="tlog__rail-item" href="{{ s_latest.url | relative_url }}">
           <span>{{ s }}</span><span>{{ s_posts | size }}</span>
         </a>
       {% endfor %}
