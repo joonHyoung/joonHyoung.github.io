@@ -43,13 +43,21 @@ comments:
   utterances:
     theme                : # "github-light" (default), "github-dark"
     issue_term           : # "pathname" (default)
+  # giscus — GitHub Discussions 기반. 다크 테마 지원, 광고 없음.
+  # 아래 TODO 3개를 채우고 위의 provider 를 "giscus" 로 바꾸면 전환된다.
+  # 준비 순서:
+  #   1) 저장소 Settings > General > Features > Discussions 체크
+  #   2) https://github.com/apps/giscus 에서 이 저장소에 giscus 앱 설치
+  #   3) https://giscus.app 에 저장소 입력 → repo_id / category / category_id 확인
+  # ⚠ 값이 비면 giscus 스크립트가 로드돼도 동작하지 않는다. 채우기 전에 provider 를 바꾸지 말 것.
+  # ⚠ 기존 Disqus 댓글은 giscus 로 이전되지 않는다.
   giscus:
-    repo_id              : # Shown during giscus setup at https://giscus.app
-    category_name        : # Full text name of the category
-    category_id          : # Shown during giscus setup at https://giscus.app
-    discussion_term      : # "pathname" (default), "url", "title", "og:title"
-    reactions_enabled    : # '1' for enabled (default), '0' for disabled
-    theme                : # "light" (default), "dark", "dark_dimmed", "transparent_dark", "preferred_color_scheme"
+    repo_id              : # TODO: giscus.app 에서 확인
+    category_name        : # TODO: giscus.app 에서 고른 카테고리 이름 (예: Announcements)
+    category_id          : # TODO: giscus.app 에서 확인
+    discussion_term      : "pathname" # "pathname" (default), "url", "title", "og:title"
+    reactions_enabled    : '1' # '1' for enabled (default), '0' for disabled
+    theme                : "transparent_dark" # 다크 배경에 맞춤. "dark", "dark_dimmed" 도 가능
   staticman:
     branch               : # "master"
     endpoint             : # "https://{your Staticman v3 API}/v3/entry/github/"

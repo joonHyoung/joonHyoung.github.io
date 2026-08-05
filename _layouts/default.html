@@ -10,8 +10,11 @@
 -->
 <html lang="{{ site.locale | slice: 0,2 | default: "en" }}" class="no-js">
   <head>
+    {% comment %}
+      head/custom.html 은 head.html 마지막에서 이미 include 한다.
+      여기서 또 부르면 폰트·color-scheme·애드센스 로더가 2번 들어간다.
+    {% endcomment %}
     {% include head.html %}
-    {% include head/custom.html %}
   </head>
 
   <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">

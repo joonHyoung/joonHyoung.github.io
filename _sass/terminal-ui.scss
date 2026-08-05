@@ -820,7 +820,9 @@ body.layout--single {
     padding-top: 34px;
   }
 
-  #disqus_thread { background: $bg; }
+  /* provider 를 giscus 로 바꿔도 같은 여백·배경을 쓰도록 함께 지정 */
+  #disqus_thread,
+  #giscus-comments { background: $bg; }
 }
 
 @media (max-width: 64em) {
