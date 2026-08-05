@@ -1,8 +1,6 @@
 ---
-layout: archive
+layout: default
 ---
-
-{{ content }}
 
 {% if paginator %}
   {% assign posts = paginator.posts %}
@@ -10,13 +8,110 @@ layout: archive
   {% assign posts = site.posts %}
 {% endif %}
 
-<div class="log-list">
-  <div class="log-list__head">
-    <span>DATE</span><span>CAT</span><span>TITLE</span><span>READ</span>
+{% comment %} 시리즈 목록 수집 {% endcomment %}
+{% assign series_names = "" | split: "," %}
+{% for p in site.posts %}
+  {% if p.series and p.series != "" %}
+    {% unless series_names contains p.series %}
+      {% assign series_names = series_names | push: p.series %}
+    {% endunless %}
+  {% endif %}
+{% endfor %}
+
+<div class="tlog">
+  <div class="tlog__main">
+
+    <div class="tlog__filter">
+      <span class="tlog__filter-label">filter</span>
+      <button type="button" class="tlog__chip is-active" data-filter="all">all</button>
+      {% for cat in site.categories %}
+        <button type="button" class="tlog__chip" data-filter="{{ cat[0] | downcase }}">{{ cat[0] | downcase }}</button>
+      {% endfor %}
+      <button type="button" class="tlog__sort" data-sort="newest">sort: newest</button>
+    </div>
+
+    <div class="tlog__head">
+      <span>DATE</span><span>CAT</span><span>TITLE</span><span>READ</span>
+    </div>
+
+    <div class="tlog__rows">
+      {% for post in posts %}
+        {% assign post_cat = post.categories | first | default: "log" | downcase %}
+        {% assign words = post.content | strip_html | number_of_words %}
+        {% assign wpm = site.words_per_minute | default: 200 %}
+        <a class="tlog__row" href="{{ post.url | relative_url }}" data-cat="{{ post_cat }}" data-date="{{ post.date | date: '%Y%m%d' }}">
+          <span class="tlog__date">{{ post.date | date: "%Y-%m-%d" }}</span>
+          <span class="tlog__cat">{{ post_cat }}</span>
+          <span class="tlog__body">
+            <span class="tlog__title">{{ post.title | markdownify | remove: "<p>" | remove: "</p>" }}</span>
+            {% if post.excerpt %}
+              <span class="tlog__excerpt">{{ post.excerpt | markdownify | strip_html | truncate: 130 }}</span>
+            {% endif %}
+            {% if post.tags.size > 0 %}
+              <span class="tlog__tags">{% for t in post.tags %}#{{ t | downcase | replace: " ", "-" }} {% endfor %}</span>
+            {% endif %}
+          </span>
+          <span class="tlog__read">{% if words < wpm %}1분{% else %}{{ words | divided_by: wpm }}분{% endif %}</span>
+        </a>
+      {% endfor %}
+    </div>
+
+    {% if paginator and paginator.total_pages > 1 %}
+      <div class="tlog__pager">
+        {% for page_num in (1..paginator.total_pages) %}
+          {% if page_num == paginator.page %}
+            <span class="is-current">[{{ page_num }}]</span>
+          {% elsif page_num == 1 %}
+            <a href="{{ '/' | relative_url }}">[{{ page_num }}]</a>
+          {% else %}
+            <a href="{{ site.paginate_path | relative_url | replace: ':num', page_num }}">[{{ page_num }}]</a>
+          {% endif %}
+        {% endfor %}
+        {% if paginator.next_page %}
+          <a href="{{ paginator.next_page_path | relative_url }}">next →</a>
+        {% endif %}
+      </div>
+    {% endif %}
   </div>
-  {% for post in posts %}
-    {% include archive-single.html %}
-  {% endfor %}
+
+  {% include log-sidebar.html series_names=series_names %}
+
+  <div class="tlog__foot">
+    <span>© {{ site.time | date: "%Y" }} {{ site.name }}</span>
+    <span>Jekyll · Minimal Mistakes</span>
+  </div>
 </div>
 
-{% include paginator.html %}
+<script>
+(function () {
+  var wrap = document.querySelector('.tlog');
+  if (!wrap) return;
+
+  var rows = Array.prototype.slice.call(wrap.querySelectorAll('.tlog__row'));
+  var rowsBox = wrap.querySelector('.tlog__rows');
+
+  wrap.querySelectorAll('.tlog__chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var f = chip.dataset.filter;
+      wrap.querySelectorAll('.tlog__chip').forEach(function (c) { c.classList.remove('is-active'); });
+      chip.classList.add('is-active');
+      rows.forEach(function (r) {
+        r.classList.toggle('is-hidden', f !== 'all' && r.dataset.cat !== f);
+      });
+    });
+  });
+
+  var sortBtn = wrap.querySelector('.tlog__sort');
+  if (sortBtn) {
+    sortBtn.addEventListener('click', function () {
+      var asc = sortBtn.dataset.sort === 'newest';
+      sortBtn.dataset.sort = asc ? 'oldest' : 'newest';
+      sortBtn.textContent = 'sort: ' + sortBtn.dataset.sort;
+      rows.slice().sort(function (a, b) {
+        var d = a.dataset.date.localeCompare(b.dataset.date);
+        return asc ? d : -d;
+      }).forEach(function (r) { rowsBox.appendChild(r); });
+    });
+  }
+})();
+</script>

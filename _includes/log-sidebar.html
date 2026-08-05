@@ -1,0 +1,59 @@
+{% comment %}
+  _includes/log-sidebar.html — 홈 우측 레일 (SEARCH / SERIES / TAGS / WHOAMI)
+  include 시 series_names 전달: {% include log-sidebar.html series_names=series_names %}
+{% endcomment %}
+
+<div class="tlog__rail">
+
+  {% if site.search == true %}
+    <div class="tlog__rail-group">
+      <div class="tlog__label">SEARCH</div>
+      <button type="button" class="tlog__search" onclick="document.querySelector('.search__toggle').click()">
+        <em>/</em><span>검색어 입력…</span>
+      </button>
+    </div>
+  {% endif %}
+
+  {% if include.series_names and include.series_names.size > 0 %}
+    <div class="tlog__rail-group">
+      <div class="tlog__label">SERIES</div>
+      {% for s in include.series_names %}
+        {% assign s_posts = site.posts | where: "series", s %}
+        <a class="tlog__rail-item" href="{{ s_posts.last.url | relative_url }}">
+          <span>{{ s }}</span><span>{{ s_posts | size }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="tlog__rail-group">
+    <div class="tlog__label">CATEGORY</div>
+    {% for cat in site.categories %}
+      <a class="tlog__rail-item" href="{{ '/categories/#' | append: cat[0] | downcase | relative_url }}">
+        <span>{{ cat[0] }}</span><span>{{ cat[1] | size }}</span>
+      </a>
+    {% endfor %}
+  </div>
+
+  <div class="tlog__rail-group">
+    <div class="tlog__label">TAGS</div>
+    <div class="tlog__tagcloud">
+      {% assign sorted_tags = site.tags | sort %}
+      {% for tag in sorted_tags limit: 12 %}
+        <a class="tlog__tagchip" href="{{ '/tags/#' | append: tag[0] | downcase | replace: ' ', '-' | relative_url }}">#{{ tag[0] | downcase | replace: " ", "-" }}</a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="tlog__whoami">
+    <div class="tlog__label">WHOAMI</div>
+    <strong>{{ site.author.name }}{% if site.author.bio %} · {{ site.author.bio }}{% endif %}</strong>
+    <p>{{ site.description }}</p>
+    <div class="tlog__links">
+      {% for link in site.author.links %}
+        {% if link.url %}<a class="tlog__btn" href="{{ link.url }}" rel="nofollow noopener">{{ link.label }}</a>{% endif %}
+      {% endfor %}
+      <a class="tlog__btn" href="{{ '/feed.xml' | relative_url }}">Feed</a>
+    </div>
+  </div>
+</div>
