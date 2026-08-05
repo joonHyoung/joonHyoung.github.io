@@ -74,12 +74,8 @@ layout: default
     {% endif %}
   </div>
 
+  {% comment %} 하단 바는 프레임 공용(.tframe__foot, _layouts/default.html)이 담당한다 {% endcomment %}
   {% include log-sidebar.html series_names=series_names %}
-
-  <div class="tlog__foot">
-    <span>© {{ site.time | date: "%Y" }} {{ site.name }}</span>
-    <span>Jekyll · Minimal Mistakes</span>
-  </div>
 </div>
 
 <script>

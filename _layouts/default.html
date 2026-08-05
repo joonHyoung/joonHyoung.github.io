@@ -17,23 +17,34 @@
   <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">
     {% include_cached skip-links.html %}
     {% include_cached browser-upgrade.html %}
-    {% include_cached masthead.html %}
 
-    <div class="initial-content">
-      {{ content }}
-    </div>
+    {% comment %}
+      .tframe — 마스트헤드·본문·푸터를 하나의 터미널 창 테두리로 감싼다.
+      테두리는 이 프레임만 그린다. 안쪽 카드(.tlog / .tpost)는 자체 테두리를
+      갖지 않고 프레임을 채운다 (_sass/terminal-ui.scss 의 FRAME 섹션).
+    {% endcomment %}
+    <div class="tframe">
+      {% include_cached masthead.html %}
 
-    {% if site.search == true %}
-      <div class="search-content">
-        {% include_cached search/search_form.html %}
+      <div class="initial-content">
+        {{ content }}
       </div>
-    {% endif %}
 
-    <div id="footer" class="page__footer">
-      <footer>
-        {% include footer/custom.html %}
-        {% include_cached footer.html %}
-      </footer>
+      {% if site.search == true %}
+        <div class="search-content">
+          {% include_cached search/search_form.html %}
+        </div>
+      {% endif %}
+
+      <div id="footer" class="page__footer">
+        <footer>
+          {% include footer/custom.html %}
+          <div class="tframe__foot">
+            <span>&copy; {{ site.time | date: "%Y" }} {{ site.name | default: site.title }}</span>
+            <span>Jekyll &middot; Minimal Mistakes</span>
+          </div>
+        </footer>
+      </div>
     </div>
 
     {% include scripts.html %}
