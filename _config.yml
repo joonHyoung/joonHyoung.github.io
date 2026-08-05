@@ -124,11 +124,16 @@ analytics:
 # 값은 사이트 코드: <코드>.goatcounter.com 의 서브도메인.
 # 추적 스크립트는 _includes/head/custom.html, 숫자 표시는 _includes/log-sidebar.html.
 #
-# ⚠ 숫자가 보이려면 GoatCounter 설정에서 'allow using the visitor counter' 를
-#   켜야 한다. 꺼져 있으면 /counter/TOTAL.json 이 403 을 반환하고,
-#   그 경우 STATS 섹션은 스스로 숨는다(깨진 값을 노출하지 않음).
-# ⚠ '오늘' 집계 기준일은 GoatCounter 사이트 타임존을 따른다. 설정에서
-#   Asia/Seoul 로 맞춰두는 것이 좋다.
+# GoatCounter 쪽 설정 (대시보드에서만 바꿀 수 있는 값 — 위치를 기록해 둔다)
+#   · /settings/main : 'allow using the visitor counter' 체크 필요.
+#     꺼져 있으면 /counter/TOTAL.json 이 403 을 반환하고, 그 경우 STATS 섹션은
+#     스스로 숨는다(깨진 값을 노출하지 않음). → 활성화 완료
+#   · /user/pref     : Timezone. 서버 집계의 하루 경계가 이 값을 따른다.
+#     → Asia/Seoul 설정 완료 (클라이언트 기준일도 Asia/Seoul 로 고정해 둠,
+#        _includes/log-sidebar.html 참조)
+#
+# 참고: 카운터 응답은 최대 4시간 캐시된다. 방문 직후 숫자가 안 오르는 것은
+#       정상이며, 실시간 확인은 GoatCounter 대시보드에서 해야 한다.
 goatcounter               : "joonhyoung"
 
 
