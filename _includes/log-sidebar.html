@@ -79,12 +79,27 @@
 
       var base = 'https://{{ site.goatcounter }}.goatcounter.com/counter/TOTAL.json';
 
-      /* GoatCounter 는 사이트 타임존 기준으로 날짜를 나눈다. 여기서는 방문자의
-         로컬 날짜를 쓰므로 자정 전후 짧은 구간에서 하루 어긋날 수 있다.
-         빌드 시각을 쓰면 푸시가 없는 날 '오늘'이 멈춰버려서 이쪽을 택했다. */
-      var d = new Date();
-      var p = function (n) { return (n < 10 ? '0' : '') + n; };
-      var today = d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+      /* '오늘'의 기준일은 방문자 기기 시간대가 아니라 블로그 기준(Asia/Seoul)으로
+         고정한다. 방문자 로컬 날짜를 쓰면 시간대가 다른 기기에서 하루가 어긋난다.
+         예: UTC 기기에서 서울 8/6 00:10 을 아직 8/5 로 계산 → 한국 기준 '오늘'이
+         시작됐는데도 전날 수치를 보여준다.
+         (빌드 시각을 쓰는 방법은 푸시가 없는 날 '오늘'이 멈춰서 쓰지 않는다.) */
+      function localDate() {
+        var d = new Date();
+        var p = function (n) { return (n < 10 ? '0' : '') + n; };
+        return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+      }
+      function seoulDate() {
+        try {
+          // en-CA 로케일은 YYYY-MM-DD 형식을 준다
+          var s = new Intl.DateTimeFormat('en-CA', {
+            timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit'
+          }).format(new Date());
+          if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+        } catch (e) { /* Intl 미지원·형식 불일치 → 아래 폴백 */ }
+        return localDate();
+      }
+      var today = seoulDate();
 
       /* 응답은 천단위가 좁은 공백으로 구분돼 온다("1 087 258") → 한국식 콤마로 */
       function fmt(v) {
