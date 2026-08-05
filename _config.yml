@@ -315,4 +315,4 @@ defaults:
 # only needs to be a GitHub-Pages-supported theme so the safe build passes.
 # `minimal-mistakes-jekyll` is NOT on that whitelist, but `jekyll-theme-hacker`
 # is. Removing this line breaks the Pages build.
-theme: jekyll-theme-hacker
+# theme: jekyll-theme-hacker
