@@ -4,11 +4,9 @@
 
 @charset "utf-8";
 
-@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin (= terminal)
-@import "minimal-mistakes"; // main partials
-
-// 폰트/색 변수는 _sass/minimal-mistakes/skins/_terminal.scss 에서 지정합니다.
-// (변수는 partials import 전에 선언돼야 적용되므로 이 파일에서 다시 덮어쓰지 않습니다.)
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // 변수 (terminal)
+@import "minimal-mistakes"; // 테마 partials
+@import "terminal-ui"; // Terminal Log 컴포넌트 — 반드시 partials 뒤
 
 html {
     font-size: 14px; // originally 16px

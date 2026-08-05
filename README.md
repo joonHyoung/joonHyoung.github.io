@@ -70,3 +70,45 @@
 - `_includes/archive-single.html`은 카테고리/태그/연도 아카이브에서 계속 쓰입니다 (1차 파일 유지).
 - 레일의 SEARCH는 마스트헤드 검색 토글을 클릭합니다. `search: true`가 켜져 있어야 보입니다.
 - SERIES 블록은 포스트 front matter에 `series: "..."`가 있을 때만 나옵니다.
+
+
+---
+
+## 3차 반영 — POST 화면 + CSS 구조 정리 (2026-08-05)
+
+### 중요: 스킨 파일 역할이 바뀌었습니다
+Minimal Mistakes 는 스킨을 partials **앞에서** import 합니다. 그래서 스킨 파일에 쓴 컴포넌트
+규칙(.toc, .page__content 등)은 같은 우선순위의 테마 규칙에 밀립니다. 목차 헤더가 민트색으로
+채워져 나온 것이 그 증상이었습니다.
+
+- `_sass/minimal-mistakes/skins/_terminal.scss` → **변수 전용**으로 축소
+- `_sass/terminal-ui.scss` → **새 파일**. 컴포넌트 CSS 전부 (.tlog, .tpost, .toc, 목록 등)
+- `assets/css/main.scss` → partials 뒤에 `@import "terminal-ui";` 추가
+
+### 이번에 바꾸는 파일
+| 파일 | 저장소 경로 | 상태 |
+|---|---|---|
+| `_sass/minimal-mistakes/skins/_terminal.scss` | 동일 | **덮어씀** (변수만 남김) |
+| `_sass/terminal-ui.scss` | 동일 | **새 파일** |
+| `assets/css/main.scss` | 동일 | **덮어씀** |
+| `_layouts/single.html` | 동일 | **덮어씀** — 시안 02 구조 |
+
+네 파일을 **함께** 올려야 합니다. 스킨만 바꾸고 main.scss 를 두면 스타일이 전부 사라집니다.
+
+### POST 에 반영되는 것
+- 좌측 프로필 사이드바 제거, 본문(좌) + 레일(우 260px) 2단 프레임, 최대 1280px 박스
+- 상단 메타: `ai/  2026-08-05 · 2분 소요 · series 3/12` 모노 한 줄
+- 본문 h2/h3 를 `## 제목` 형태의 작은 모노 라벨로
+- 목차: 채워진 민트 헤더 제거 → 작은 라벨 + 좌측 보더 항목
+- 우측 레일: ON THIS PAGE / SERIES 진행도 / WHOAMI
+- 하단: 태그 칩, 이전·다음 카드
+
+### 홈에도 함께 반영되는 수정
+- 레일·페이저 링크의 밑줄·방문색 제거
+- hover 하이라이트를 `@media (hover: hover)` 로 한정 (첫 행 고정 현상 해결)
+- 태그 칩 축소, 제목 굵기 400 고정
+- 프레임 최대 1280px + 좌우 32px 여백 (박스 형태)
+
+### 주의
+- `series` front matter 가 없으면 SERIES 블록과 메타의 `series n/m` 은 자동으로 숨겨집니다.
+- 공유 버튼·관련 글은 시안에 없어 뺐습니다. 필요하면 알려주세요.

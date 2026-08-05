@@ -1,0 +1,724 @@
+@charset "utf-8";
+
+/* ==========================================================================
+   Terminal Log — 컴포넌트 스타일
+   assets/css/main.scss 에서 minimal-mistakes partials **뒤에** import 됩니다.
+   (변수는 _sass/minimal-mistakes/skins/_terminal.scss)
+   ========================================================================== */
+
+body { background: $bg; }
+
+/* 상단 마스트헤드: 터미널 프롬프트 */
+.masthead {
+  border-bottom: 1px solid $line;
+  background: $bg;
+
+  .site-title {
+    font-family: $monospace-font-family;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    color: $accent;
+    letter-spacing: -0.01em;
+  }
+
+  .site-subtitle {
+    font-family: $monospace-font-family;
+    font-size: 0.75rem;
+    color: $text-faint;
+  }
+
+  .masthead__prompt {
+    font-family: $monospace-font-family;
+    font-size: 0.75rem;
+    color: $text-faint;
+    margin-left: 0.75em;
+    align-self: center;
+    white-space: nowrap;
+
+    @media (max-width: 37.5em) { display: none; }
+  }
+
+  .greedy-nav {
+    background: transparent;
+
+    a {
+      font-family: $monospace-font-family;
+      font-size: 0.71875rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: $text-dim;
+
+      &:hover { color: $accent-dim; }
+    }
+
+    .visible-links a:before { background: $accent; }
+  }
+}
+
+/* 아카이브(카테고리·태그·연도) 공용 */
+.page__title {
+  letter-spacing: -0.025em;
+  line-height: 1.4;
+  color: #f2f3f5;
+  text-wrap: pretty;
+}
+
+.page__meta,
+.page__date,
+.page__taxonomy {
+  font-family: $monospace-font-family;
+  font-size: 0.71875rem;
+  color: $text-faint;
+}
+
+.sidebar {
+  .author__name  { font-size: 0.8125rem; color: $text; }
+  .author__bio   { font-size: 0.75rem; color: $text-dim; line-height: 1.7; }
+  .author__urls {
+    li { border: 0; }
+    a {
+      font-family: $monospace-font-family;
+      font-size: 0.6875rem;
+      color: $text-dim;
+      border: 1px solid #26282e;
+      padding: 5px 10px;
+      display: inline-block;
+      margin: 0 4px 6px 0;
+
+      &:hover { border-color: $accent; color: $accent-dim; text-decoration: none; }
+    }
+  }
+  h3, .nav__title {
+    font-family: $monospace-font-family;
+    font-size: 0.625rem;
+    letter-spacing: 0.14em;
+    color: #4d5259;
+    background: transparent;
+    text-transform: uppercase;
+  }
+}
+
+/* 코드 블록 */
+div.highlighter-rouge, figure.highlight, pre.highlight {
+  border: 1px solid $line;
+  border-radius: 0;
+  background: $bg-code;
+}
+code, pre, .highlight { font-family: $monospace-font-family; }
+
+/* 태그 / 카테고리 칩 */
+.page__taxonomy-item,
+.taxonomy__index a,
+.archive__item-tags a {
+  font-family: $monospace-font-family;
+  font-size: 0.6875rem;
+  border: 1px solid #26282e;
+  border-radius: 0;
+  background: transparent;
+  color: #9aa0a8;
+
+  &:hover { border-color: $accent; color: $accent-dim; }
+}
+
+/* 페이지네이션 */
+.pagination {
+  li a {
+    font-family: $monospace-font-family;
+    font-size: 0.71875rem;
+    border: 0;
+    border-radius: 0;
+    color: $text-faint;
+
+    &:hover { color: $text; background: transparent; }
+  }
+  li.active a, li a.current { color: $accent; background: transparent; }
+}
+
+/* 검색 */
+.search__toggle { color: $text-dim; &:hover { color: $accent; } }
+.search-input {
+  font-family: $monospace-font-family;
+  background: $bg;
+  color: $text;
+}
+
+/* 푸터 */
+.page__footer {
+  border-top: 1px solid $line;
+  background: $bg;
+  color: #43474e;
+  font-family: $monospace-font-family;
+  font-size: 0.6875rem;
+
+  a { color: #43474e; &:hover { color: $accent-dim; } }
+}
+
+/* 아카이브 목록 — DATE / CAT / TITLE / READ 4열 */
+.log-list {
+  border-top: 1px solid $line;
+
+  &__head {
+    display: grid;
+    grid-template-columns: 104px 68px 1fr 60px;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid $line;
+    font-family: $monospace-font-family;
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    color: #43474e;
+
+    span:last-child { text-align: right; }
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 104px 68px 1fr 60px;
+    gap: 16px;
+    align-items: baseline;
+    padding: 15px 12px;
+    margin: 0 -12px;
+    border-bottom: 1px solid $line-soft;
+    text-decoration: none;
+
+    @media (hover: hover) {
+      &:hover { background: $bg-raised; }
+    }
+  }
+
+  &__date, &__read { font-family: $monospace-font-family; font-size: 0.71875rem; color: $text-faint; }
+  &__read { text-align: right; }
+  &__cat  { font-family: $monospace-font-family; font-size: 0.71875rem; color: $accent; }
+  &__title { font-size: 0.875rem; font-weight: 400; color: $text; line-height: 1.5; display: block; text-wrap: pretty; }
+  &__excerpt { font-size: 0.78125rem; color: #6f747c; line-height: 1.6; margin: 6px 0 0; text-wrap: pretty; }
+  &__tags { font-family: $monospace-font-family; font-size: 0.65625rem; color: #4d5259; display: block; margin-top: 6px; }
+}
+
+@media (max-width: 37.5em) {
+  .log-list__head { display: none; }
+  .log-list__row {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "date read" "cat cat" "title title";
+    row-gap: 6px;
+  }
+  .log-list__date { grid-area: date; }
+  .log-list__read { grid-area: read; }
+  .log-list__cat { grid-area: cat; }
+  .log-list__body { grid-area: title; }
+}
+
+/* ==========================================================================
+   HOME — 터미널 로그 프레임 (시안 1a · 01)
+   ========================================================================== */
+
+body.layout--home {
+  #main {
+    max-width: 1280px;
+    width: 100%;
+    padding: 0 32px;
+    margin: 0 auto;
+    float: none;
+    clear: both;
+  }
+  .sidebar, .page__footer-follow, .archive__subtitle { display: none; }
+  .initial-content, .page__content, .archive {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    float: none;
+  }
+
+  @media (max-width: 37.5em) {
+    #main { padding: 0 14px; }
+  }
+}
+
+.tlog {
+  border: 1px solid $line;
+  border-radius: 2px;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  margin: 2.5em 0 4em;
+  font-family: $monospace-font-family;
+
+  a, a:visited, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 0;
+  }
+
+  &__main { border-right: 1px solid $line; min-width: 0; }
+
+  /* 필터 행 */
+  &__filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-bottom: 1px solid $line;
+  }
+  &__filter-label { font-size: 0.6875rem; color: #4d5259; }
+  &__chip {
+    font-size: 0.6875rem;
+    padding: 4px 11px;
+    border: 1px solid #2c2f36;
+    color: #9aa0a8;
+    cursor: pointer;
+    background: transparent;
+    line-height: 1.4;
+
+    &:hover { border-color: $accent; color: $accent-dim; }
+    &.is-active { background: $accent; border-color: $accent; color: $bg; }
+  }
+  &__sort {
+    margin-left: auto;
+    font-size: 0.6875rem;
+    padding: 4px 11px;
+    border: 1px solid #26282e;
+    color: $text-dim;
+    background: transparent;
+    cursor: pointer;
+
+    &:hover { border-color: $accent; color: $accent-dim; }
+  }
+
+  /* 컬럼 헤더 */
+  &__head {
+    display: grid;
+    grid-template-columns: 104px 68px 1fr 60px;
+    gap: 16px;
+    padding: 10px 28px;
+    border-bottom: 1px solid $line;
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    color: #43474e;
+
+    span:last-child { text-align: right; }
+  }
+
+  /* 행 */
+  &__row {
+    display: grid;
+    grid-template-columns: 104px 68px 1fr 60px;
+    gap: 16px;
+    align-items: baseline;
+    padding: 15px 28px;
+    border-bottom: 1px solid $line-soft;
+    background: transparent;
+
+    @media (hover: hover) {
+      &:hover { background: $bg-raised; }
+    }
+    &:focus { background: transparent; outline: 0; }
+    &.is-hidden { display: none; }
+  }
+  &__date, &__read { font-size: 0.71875rem; color: $text-faint; }
+  &__read { text-align: right; }
+  &__cat { font-size: 0.71875rem; color: $accent; }
+  &__body { min-width: 0; display: block; }
+  &__title {
+    display: block;
+    font-family: $global-font-family;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: $text;
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+  &__excerpt {
+    display: block;
+    font-family: $global-font-family;
+    font-size: 0.78125rem;
+    color: #6f747c;
+    line-height: 1.6;
+    margin-top: 6px;
+    text-wrap: pretty;
+  }
+  &__tags { display: block; font-size: 0.65625rem; color: #4d5259; margin-top: 6px; }
+
+  /* 페이지네이션 */
+  &__pager {
+    display: flex;
+    gap: 12px;
+    padding: 16px 28px;
+    font-size: 0.71875rem;
+    color: $text-faint;
+
+    a:hover { color: $text; }
+    .is-current { color: $accent; }
+  }
+
+  /* 우측 레일 */
+  &__rail {
+    padding: 22px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+  &__label { font-size: 0.625rem; color: #4d5259; letter-spacing: 0.14em; }
+  &__search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #26282e;
+    padding: 9px 11px;
+    width: 100%;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+
+    &:hover { border-color: #3a3d45; }
+    em { color: $accent; font-style: normal; font-size: 0.75rem; }
+    span { font-size: 0.75rem; color: $text-faint; }
+  }
+  &__rail-group { display: flex; flex-direction: column; gap: 11px; }
+  &__rail-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78125rem;
+    color: #b9bdc4;
+
+    span:first-child { font-family: $global-font-family; }
+    span:last-child { color: #4d5259; }
+    &:hover, &:hover span { color: $accent-dim; }
+  }
+  &__tagcloud { display: flex; flex-wrap: wrap; gap: 5px; }
+  &__tagchip {
+    font-size: 0.65625rem;
+    line-height: 1.4;
+    padding: 3px 8px;
+    border: 1px solid #23252b;
+    color: #8a9098;
+
+    &:hover { border-color: $accent; color: $accent-dim; }
+  }
+  &__whoami {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: 1px solid $line;
+    padding-top: 20px;
+
+    strong { font-family: $global-font-family; font-size: 0.78125rem; color: $text; font-weight: 400; }
+    p {
+      font-family: $global-font-family;
+      font-size: 0.75rem;
+      color: $text-dim;
+      line-height: 1.7;
+      margin: 0;
+    }
+  }
+  &__links { display: flex; gap: 8px; margin-top: 4px; }
+  &__btn {
+    font-size: 0.6875rem;
+    padding: 5px 10px;
+    border: 1px solid #26282e;
+    color: #9aa0a8;
+
+    &:hover { border-color: $accent; color: $accent-dim; }
+  }
+
+  /* 프레임 하단 바 */
+  &__foot {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 28px;
+    border-top: 1px solid $line;
+    font-size: 0.6875rem;
+    color: #43474e;
+  }
+}
+
+@media (max-width: 64em) {
+  .tlog { grid-template-columns: 1fr; }
+  .tlog__main { border-right: 0; border-bottom: 1px solid $line; }
+}
+
+@media (max-width: 37.5em) {
+  .tlog__head { display: none; }
+  .tlog__row {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "date read" "cat cat" "body body";
+    row-gap: 6px;
+    padding: 14px 18px;
+  }
+  .tlog__date { grid-area: date; }
+  .tlog__read { grid-area: read; }
+  .tlog__cat { grid-area: cat; }
+  .tlog__body { grid-area: body; }
+  .tlog__filter { flex-wrap: wrap; padding: 12px 18px; }
+  .tlog__sort { margin-left: 0; }
+}
+
+/* ==========================================================================
+   POST — 터미널 로그 프레임 (시안 1a · 02)
+   ========================================================================== */
+
+body.layout--single {
+  #main {
+    max-width: 1280px;
+    width: 100%;
+    padding: 0 32px;
+    margin: 0 auto;
+    float: none;
+    clear: both;
+  }
+  .sidebar, .page__footer-follow { display: none; }
+  .page, .page__inner-wrap {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    float: none;
+  }
+
+  @media (max-width: 37.5em) {
+    #main { padding: 0 14px; }
+  }
+}
+
+.tpost {
+  border: 1px solid $line;
+  border-radius: 2px;
+  margin: 2.5em 0 4em;
+  font-family: $monospace-font-family;
+  display: grid;
+  grid-template-columns: 1fr 260px;
+
+  a, a:visited, a:focus { border-bottom: 0; }
+
+  &__main {
+    border-right: 1px solid $line;
+    padding: 44px 64px 56px;
+    min-width: 0;
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.71875rem;
+    color: $text-faint;
+    margin-bottom: 22px;
+
+    .is-cat { color: $accent; }
+  }
+
+  &__title {
+    font-family: $global-font-family;
+    font-size: 2.0625rem;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.025em;
+    color: #f2f3f5;
+    margin: 0 0 22px;
+    text-wrap: pretty;
+  }
+
+  /* 본문 */
+  &__body {
+    font-family: $global-font-family;
+    max-width: 740px;
+
+    p, li {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: #a7abb3;
+      text-wrap: pretty;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: $monospace-font-family;
+      font-weight: 500;
+      font-size: 0.6875rem;
+      letter-spacing: 0.1em;
+      color: #4d5259;
+      text-transform: none;
+      border: 0;
+      margin: 2.8em 0 1em;
+      line-height: 1.5;
+
+      &:before { content: "## "; color: #33373d; }
+    }
+
+    strong { color: #d7d9dd; }
+
+    blockquote {
+      border-left: 2px solid $accent;
+      padding: 2px 0 2px 20px;
+      margin: 1.6em 0;
+      font-style: normal;
+      color: #c9cdd4;
+
+      p { color: #c9cdd4; }
+    }
+
+    code {
+      font-family: $monospace-font-family;
+      background: $bg-raised;
+      color: $accent-dim;
+      padding: 2px 5px;
+      border-radius: 0;
+    }
+
+    div.highlighter-rouge, figure.highlight, pre.highlight {
+      border: 1px solid $line;
+      border-radius: 0;
+      background: $bg-code;
+    }
+
+    img { border: 1px solid $line; }
+
+    a { color: $accent; &:hover { color: $accent-dim; } }
+  }
+
+  /* 태그 */
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 34px 0 0;
+  }
+  &__tag {
+    font-size: 0.6875rem;
+    padding: 5px 10px;
+    border: 1px solid #26282e;
+    color: #9aa0a8;
+
+    &:hover { border-color: $accent; color: $accent-dim; }
+  }
+
+  /* 이전 / 다음 */
+  &__nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    border-top: 1px solid $line;
+    margin-top: 34px;
+    padding-top: 22px;
+    max-width: 740px;
+  }
+  &__navcard {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    border: 1px solid $line;
+    padding: 14px 16px;
+
+    &:hover { border-color: $accent; background: $bg-raised; }
+    &.is-next { text-align: right; }
+
+    em { font-style: normal; font-size: 0.65625rem; color: $text-faint; }
+    span {
+      font-family: $global-font-family;
+      font-size: 0.8125rem;
+      color: $text;
+      line-height: 1.5;
+      text-wrap: pretty;
+    }
+  }
+
+  /* 우측 레일 */
+  &__rail {
+    padding: 44px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    align-self: start;
+    position: sticky;
+    top: 2em;
+  }
+  &__label { font-size: 0.625rem; color: #4d5259; letter-spacing: 0.14em; }
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+
+    &.is-divided { border-top: 1px solid $line; padding-top: 20px; }
+  }
+  &__whoami-name { font-family: $global-font-family; font-size: 0.78125rem; color: $text; }
+  &__links { display: flex; gap: 8px; }
+  &__btn {
+    font-size: 0.6875rem;
+    padding: 5px 10px;
+    border: 1px solid #26282e;
+    color: #9aa0a8;
+
+    &:hover { border-color: $accent; color: $accent-dim; }
+  }
+  &__seriescount { font-size: 0.71875rem; color: $text-dim; }
+}
+
+/* 목차 — 채워진 민트 헤더 제거, 시안 스타일로 */
+.tpost .toc {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  margin: 0;
+  float: none;
+  width: 100%;
+  font-family: $monospace-font-family;
+
+  header, h4, .nav__title {
+    background: transparent;
+    color: #4d5259;
+    font-family: $monospace-font-family;
+    font-size: 0.625rem;
+    letter-spacing: 0.14em;
+    padding: 0;
+    margin: 0 0 11px;
+    text-transform: uppercase;
+    border: 0;
+
+    i { display: none; }
+  }
+
+  .toc__menu {
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+
+    a {
+      font-family: $global-font-family;
+      font-size: 0.75rem;
+      color: $text-dim;
+      border-left: 2px solid $line;
+      border-bottom: 0;
+      padding: 6px 0 6px 11px;
+      line-height: 1.5;
+
+      &:hover { color: $text; background: transparent; }
+    }
+
+    li ul li a { font-size: 0.71875rem; padding-left: 22px; }
+
+    .active a {
+      color: $accent-dim;
+      border-left-color: $accent;
+      background: transparent;
+    }
+  }
+}
+
+/* 시리즈 진행도 */
+.series-progress {
+  display: flex;
+  gap: 3px;
+  margin: 4px 0;
+
+  span { flex: 1; height: 3px; background: $line; }
+  span.done { background: $accent; }
+}
+
+@media (max-width: 64em) {
+  .tpost { grid-template-columns: 1fr; }
+  .tpost__main { border-right: 0; border-bottom: 1px solid $line; padding: 34px 28px 40px; }
+  .tpost__rail { position: static; padding: 26px 28px 34px; }
+}
+
+@media (max-width: 37.5em) {
+  .tpost__main { padding: 26px 18px 32px; }
+  .tpost__title { font-size: 1.5rem; }
+  .tpost__nav { grid-template-columns: 1fr; }
+  .tpost__navcard.is-next { text-align: left; }
+}
