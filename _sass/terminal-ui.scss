@@ -787,3 +787,46 @@ body.layout--single {
   .tpost__nav { grid-template-columns: 1fr; }
   .tpost__navcard.is-next { text-align: left; }
 }
+
+/* ==========================================================================
+   COMMENTS — Disqus 영역
+
+   댓글 블록은 _layouts/single.html 에서 </article> **밖**에 렌더되므로
+   .tpost 의 패딩을 못 받는다. 프레임 안쪽 여백을 직접 주고 본문과 정렬한다.
+   배경을 명시하는 이유: Disqus 는 iframe 안이라 CSS 로 색을 바꿀 수 없고,
+   컨테이너의 배경색을 읽어 라이트/다크를 자동 판별한다. 투명으로 두면
+   흰색으로 오판할 수 있다. (위젯 자체를 강제하려면 Disqus 관리자
+   Settings > Appearance > Color scheme = Dark 로 지정해야 한다.)
+   ========================================================================== */
+
+.tframe .page__comments {
+  float: none;
+  clear: both;
+  width: 100%;
+  margin: 0;
+  padding: 0 64px 48px;
+  background: $bg;
+  border-top: 1px solid $line;
+  color: $text;
+
+  .page__comments-title {
+    font-family: $monospace-font-family;
+    font-size: 0.625rem;
+    letter-spacing: 0.14em;
+    color: #4d5259;
+    text-transform: uppercase;
+    border-top: 0;
+    margin: 0 0 14px;
+    padding-top: 34px;
+  }
+
+  #disqus_thread { background: $bg; }
+}
+
+@media (max-width: 64em) {
+  .tframe .page__comments { padding: 0 28px 40px; }
+}
+
+@media (max-width: 37.5em) {
+  .tframe .page__comments { padding: 0 18px 32px; }
+}
