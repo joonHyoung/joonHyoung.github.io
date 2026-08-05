@@ -30,18 +30,19 @@ masthead_title           : # overrides the website title displayed in the masthe
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
 comments:
-  # 현재 댓글 비활성화. false, "disqus", "discourse", "facebook", "staticman",
-  # "staticman_v2", "utterances", "giscus", "custom"
+  # false, "disqus", "discourse", "facebook", "staticman", "staticman_v2",
+  # "utterances", "giscus", "custom"
   #
-  # Disqus 를 끈 이유: Disqus 위젯은 iframe 이라 사이트 CSS 가 닿지 않아
-  # 다크 배경 위에 흰 블록으로 렌더되고, 무료 플랜에서는 Disqus 자체
-  # "Sponsored" 광고가 댓글 위에 붙는다. 둘 다 코드로 제어할 수 없다.
-  # (_layouts/single.html 이 site.comments.provider 를 보고 분기하므로
-  #  이 값이 false 면 댓글 블록 자체가 출력되지 않는다.)
+  # Disqus 에서 giscus 로 전환했다. Disqus 위젯은 iframe 이라 사이트 CSS 가
+  # 닿지 않아 다크 배경 위에 흰 블록으로 렌더됐고, 무료 플랜에서는 Disqus 자체
+  # "Sponsored" 광고도 제거할 수 없었다. giscus 는 다크 테마를 직접 지정할 수
+  # 있고 광고가 없다.
+  # (_layouts/single.html 이 site.comments.provider 로 분기한다. false 면
+  #  댓글 블록 자체가 출력되지 않는다. production 빌드에서만 렌더된다.)
   #
-  # 되돌리려면: "disqus" 로 바꾸면 shortname 이 그대로 남아 있어 즉시 복구된다.
-  # giscus 로 가려면: 아래 giscus 블록의 TODO 3개를 채우고 "giscus" 로 바꾼다.
-  provider               : false
+  # 기존 Disqus 댓글은 이전되지 않았다. Disqus 서버에 그대로 남아 있으므로
+  # "disqus" 로 되돌리면 다시 표시된다(흰 배경·광고도 함께 돌아온다).
+  provider               : "giscus"
   disqus:
     shortname            : "joonhyoung-github-io" # https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-
   discourse:
@@ -55,20 +56,20 @@ comments:
     theme                : # "github-light" (default), "github-dark"
     issue_term           : # "pathname" (default)
   # giscus — GitHub Discussions 기반. 다크 테마 지원, 광고 없음.
-  # 아래 TODO 3개를 채우고 위의 provider 를 "giscus" 로 바꾸면 전환된다.
-  # 준비 순서:
-  #   1) 저장소 Settings > General > Features > Discussions 체크
-  #   2) https://github.com/apps/giscus 에서 이 저장소에 giscus 앱 설치
-  #   3) https://giscus.app 에 저장소 입력 → repo_id / category / category_id 확인
-  # ⚠ 값이 비면 giscus 스크립트가 로드돼도 동작하지 않는다. 채우기 전에 provider 를 바꾸지 말 것.
-  # ⚠ 기존 Disqus 댓글은 giscus 로 이전되지 않는다.
+  # 값은 https://giscus.app 이 생성해 준 스니펫에서 그대로 가져왔다.
+  # 전제 조건(이미 완료): 저장소 공개 + Discussions 활성화 + giscus 앱 설치.
+  # data-repo 는 include 가 site.repository 에서 만든다(위의 repository 값).
   giscus:
-    repo_id              : # TODO: giscus.app 에서 확인
-    category_name        : # TODO: giscus.app 에서 고른 카테고리 이름 (예: Announcements)
-    category_id          : # TODO: giscus.app 에서 확인
+    repo_id              : "R_kgDOGXDXQQ"
+    category_name        : "Comments"
+    category_id          : "DIC_kwDOGXDXQc4DCs_7"
     discussion_term      : "pathname" # "pathname" (default), "url", "title", "og:title"
     reactions_enabled    : '1' # '1' for enabled (default), '0' for disabled
     theme                : "transparent_dark" # 다크 배경에 맞춤. "dark", "dark_dimmed" 도 가능
+    lang                 : "ko" # giscus UI 언어. 미지정 시 방문자 브라우저 언어를 따른다
+    input_position       : "bottom" # 입력창 위치: "bottom" (default), "top"
+    strict               : '0' # '1' 이면 제목까지 엄격히 일치하는 discussion 만 매칭
+    emit_metadata        : '0' # '1' 이면 discussion 메타데이터를 postMessage 로 내보낸다
   staticman:
     branch               : # "master"
     endpoint             : # "https://{your Staticman v3 API}/v3/entry/github/"

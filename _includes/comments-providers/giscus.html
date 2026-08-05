@@ -17,8 +17,18 @@
     script.setAttribute('data-mapping', '{{ site.comments.giscus.discussion_term | default: "pathname" }}');
     script.setAttribute('data-reactions-enabled', '{{ site.comments.giscus.reactions_enabled | default: 1 }}');
     script.setAttribute('data-theme', '{{ site.comments.giscus.theme | default: "light" }}');
+    {%- comment -%}
+      아래 4개는 Minimal Mistakes 기본 include 에 없어서 추가했다.
+      giscus.app 이 생성해 준 스니펫과 속성을 일치시키기 위한 것이며,
+      특히 data-lang 이 없으면 giscus UI 가 방문자 브라우저 언어를 따라간다.
+    {%- endcomment -%}
+    script.setAttribute('data-lang', '{{ site.comments.giscus.lang | default: "en" }}');
+    script.setAttribute('data-input-position', '{{ site.comments.giscus.input_position | default: "bottom" }}');
+    script.setAttribute('data-strict', '{{ site.comments.giscus.strict | default: 0 }}');
+    script.setAttribute('data-emit-metadata', '{{ site.comments.giscus.emit_metadata | default: 0 }}');
     script.setAttribute('crossorigin', 'anonymous');
 
+    // src 를 가진 동적 삽입 스크립트는 기본이 async 이므로 async 속성은 불필요하다.
     commentContainer.appendChild(script);
   })();
 </script>
