@@ -32,7 +32,8 @@ There is no lint step and no site-level test suite — the `test/` directory bel
 
 - **Posts** go in `_posts/` named `YYYY-MM-DD-title.md`. Front matter uses `title`, `categories`, `tag`, `toc`, `last_modified_at`, `comments`, `mathjax`. Post-wide defaults (`layout: single`, author profile, read time, comments, share, related) are applied via `defaults:` in `_config.yml` — do not repeat them per post.
 - **Standalone pages** go in `_pages/` with an explicit `permalink`. The category/tag/year archives (`category-archive.md`, `tag-archive.md`, `year-archive.md`) are Liquid-generated (`type: liquid`) and their permalinks (`/categories/`, `/tags/`, `/year-archive/`) must match the archive paths configured in `_config.yml`.
-- Permalinks for posts are `/:categories/:title/`; pagination shows 5 posts per page.
+- Permalinks for posts are `/:categories/:title/`.
+- **The home list has no server-side pagination.** `jekyll-paginate` is deliberately disabled (`paginate`/`paginate_path` are commented out in `_config.yml`) and `_layouts/home.html` renders *every* post, doing filter + sort + paging in client-side JS. This is required for correctness: the category filter can only hide rows that exist in the DOM, so with server-side paging a category whose posts fall on page 2 produced an empty page 1. Page size lives in the `per_page` variable in `_layouts/home.html`. Re-enabling `paginate` would regenerate `/page2/` and duplicate the home list.
 - Top navigation is driven by `_data/navigation.yml`; UI string translations by `_data/ui-text.yml`.
 
 ## Key configuration facts

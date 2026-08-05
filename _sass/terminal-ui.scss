@@ -425,7 +425,9 @@ body.layout--home {
   }
   &__tags { display: block; font-size: 0.65625rem; color: #4d5259; margin-top: 6px; }
 
-  /* 페이지네이션 */
+  /* 페이지네이션 — JS 가 현재 필터 결과에 맞춰 그린다.
+     [hidden] 을 따로 지정하는 이유: display:flex 가 브라우저 기본
+     [hidden]{display:none} 을 이겨버려서 숨김이 먹지 않는다. */
   &__pager {
     display: flex;
     gap: 12px;
@@ -435,6 +437,8 @@ body.layout--home {
 
     a:hover { color: $text; }
     .is-current { color: $accent; }
+
+    &[hidden] { display: none; }
   }
 
   /* 우측 레일 */

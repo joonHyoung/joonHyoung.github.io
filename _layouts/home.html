@@ -2,11 +2,22 @@
 layout: default
 ---
 
-{% if paginator %}
-  {% assign posts = paginator.posts %}
-{% else %}
-  {% assign posts = site.posts %}
-{% endif %}
+{% comment %}
+  홈 목록 — 전체 글을 렌더하고 필터·정렬·페이징을 모두 클라이언트에서 처리한다.
+
+  Jekyll 페이지네이션(paginator)을 쓰지 않는 이유:
+  필터는 DOM 에 있는 행만 걸러내는데, 서버가 글을 5개씩 잘라 보내면 두 기준이
+  어긋난다. 예를 들어 swift 글이 2페이지에 있으면 1페이지에서 swift 를 눌러도
+  결과가 0개가 된다. 정렬(sort)도 같은 이유로 현재 페이지 안에서만 동작했다.
+  칩 목록은 site.categories(전체 기준)라 더 어긋났다.
+  → 전체를 렌더해서 필터·정렬·페이저가 항상 같은 집합을 보게 한다.
+    (_config.yml 의 paginate / paginate_path 는 제거했다)
+
+  초기 페인트에서 첫 페이지 분량만 보이도록 서버에서 미리 is-hidden 을 붙인다.
+  JS 가 없으면 최신 {{ per_page }}개가 보이고 페이저는 숨은 상태로 남는다.
+{% endcomment %}
+
+{% assign per_page = 5 %}
 
 {% comment %} 시리즈 목록 수집 {% endcomment %}
 {% assign series_names = "" | split: "," %}
@@ -35,11 +46,11 @@ layout: default
     </div>
 
     <div class="tlog__rows">
-      {% for post in posts %}
+      {% for post in site.posts %}
         {% assign post_cat = post.categories | first | default: "log" | downcase %}
         {% assign words = post.content | strip_html | number_of_words %}
         {% assign wpm = site.words_per_minute | default: 200 %}
-        <a class="tlog__row" href="{{ post.url | relative_url }}" data-cat="{{ post_cat }}" data-date="{{ post.date | date: '%Y%m%d' }}">
+        <a class="tlog__row{% if forloop.index > per_page %} is-hidden{% endif %}" href="{{ post.url | relative_url }}" data-cat="{{ post_cat }}" data-date="{{ post.date | date: '%Y%m%d' }}">
           <span class="tlog__date">{{ post.date | date: "%Y-%m-%d" }}</span>
           <span class="tlog__cat">{{ post_cat }}</span>
           <span class="tlog__body">
@@ -56,22 +67,8 @@ layout: default
       {% endfor %}
     </div>
 
-    {% if paginator and paginator.total_pages > 1 %}
-      <div class="tlog__pager">
-        {% for page_num in (1..paginator.total_pages) %}
-          {% if page_num == paginator.page %}
-            <span class="is-current">[{{ page_num }}]</span>
-          {% elsif page_num == 1 %}
-            <a href="{{ '/' | relative_url }}">[{{ page_num }}]</a>
-          {% else %}
-            <a href="{{ site.paginate_path | relative_url | replace: ':num', page_num }}">[{{ page_num }}]</a>
-          {% endif %}
-        {% endfor %}
-        {% if paginator.next_page %}
-          <a href="{{ paginator.next_page_path | relative_url }}">next →</a>
-        {% endif %}
-      </div>
-    {% endif %}
+    {% comment %} 페이저는 JS 가 현재 필터 결과에 맞춰 그린다 {% endcomment %}
+    <div class="tlog__pager" hidden></div>
   </div>
 
   {% comment %} 하단 바는 프레임 공용(.tframe__foot, _layouts/default.html)이 담당한다 {% endcomment %}
@@ -83,31 +80,92 @@ layout: default
   var wrap = document.querySelector('.tlog');
   if (!wrap) return;
 
-  var rows = Array.prototype.slice.call(wrap.querySelectorAll('.tlog__row'));
+  var PER_PAGE = {{ per_page }};
   var rowsBox = wrap.querySelector('.tlog__rows');
+  var pager   = wrap.querySelector('.tlog__pager');
+  var sortBtn = wrap.querySelector('.tlog__sort');
+  var chips   = Array.prototype.slice.call(wrap.querySelectorAll('.tlog__chip'));
+  var allRows = Array.prototype.slice.call(rowsBox.querySelectorAll('.tlog__row'));
 
-  wrap.querySelectorAll('.tlog__chip').forEach(function (chip) {
+  var state = { filter: 'all', sort: 'newest', page: 1 };
+
+  /* 현재 필터·정렬을 적용한 행 목록 */
+  function selected() {
+    var list = state.filter === 'all'
+      ? allRows.slice()
+      : allRows.filter(function (r) { return r.getAttribute('data-cat') === state.filter; });
+
+    list.sort(function (a, b) {
+      var d = a.getAttribute('data-date').localeCompare(b.getAttribute('data-date'));
+      return state.sort === 'newest' ? -d : d;
+    });
+    return list;
+  }
+
+  function pageLink(label, n) {
+    var a = document.createElement('a');
+    a.href = '#';
+    a.textContent = label;
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      state.page = n;
+      render();
+    });
+    return a;
+  }
+
+  function render() {
+    var list  = selected();
+    var pages = Math.max(1, Math.ceil(list.length / PER_PAGE));
+    if (state.page > pages) state.page = pages;
+
+    var start = (state.page - 1) * PER_PAGE;
+    var shown = list.slice(start, start + PER_PAGE);
+
+    /* 전부 숨긴 뒤, 보여줄 것만 정렬 순서대로 다시 붙인다 */
+    allRows.forEach(function (r) { r.classList.add('is-hidden'); });
+    shown.forEach(function (r) {
+      r.classList.remove('is-hidden');
+      rowsBox.appendChild(r);
+    });
+
+    pager.textContent = '';
+    if (pages > 1) {
+      for (var i = 1; i <= pages; i++) {
+        if (i === state.page) {
+          var cur = document.createElement('span');
+          cur.className = 'is-current';
+          cur.textContent = '[' + i + ']';
+          pager.appendChild(cur);
+        } else {
+          pager.appendChild(pageLink('[' + i + ']', i));
+        }
+      }
+      if (state.page < pages) pager.appendChild(pageLink('next →', state.page + 1));
+    }
+    pager.hidden = pages <= 1;
+  }
+
+  chips.forEach(function (chip) {
     chip.addEventListener('click', function () {
-      var f = chip.dataset.filter;
-      wrap.querySelectorAll('.tlog__chip').forEach(function (c) { c.classList.remove('is-active'); });
+      chips.forEach(function (c) { c.classList.remove('is-active'); });
       chip.classList.add('is-active');
-      rows.forEach(function (r) {
-        r.classList.toggle('is-hidden', f !== 'all' && r.dataset.cat !== f);
-      });
+      state.filter = chip.getAttribute('data-filter');
+      state.page = 1;
+      render();
     });
   });
 
-  var sortBtn = wrap.querySelector('.tlog__sort');
   if (sortBtn) {
     sortBtn.addEventListener('click', function () {
-      var asc = sortBtn.dataset.sort === 'newest';
-      sortBtn.dataset.sort = asc ? 'oldest' : 'newest';
-      sortBtn.textContent = 'sort: ' + sortBtn.dataset.sort;
-      rows.slice().sort(function (a, b) {
-        var d = a.dataset.date.localeCompare(b.dataset.date);
-        return asc ? d : -d;
-      }).forEach(function (r) { rowsBox.appendChild(r); });
+      state.sort = state.sort === 'newest' ? 'oldest' : 'newest';
+      sortBtn.setAttribute('data-sort', state.sort);
+      sortBtn.textContent = 'sort: ' + state.sort;
+      state.page = 1;
+      render();
     });
   }
+
+  render();
 })();
 </script>
