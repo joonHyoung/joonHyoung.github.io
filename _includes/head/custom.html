@@ -7,12 +7,12 @@
 <meta name="color-scheme" content="dark">
 
 <!-- Google AdSense — Auto ads (사이트 전체).
-     이 로더 하나만 두면 광고 위치·개수는 구글이 자동으로 정한다. 개수를 줄이려면
-     애드센스 대시보드 > 광고 > 사이트별 설정 > Auto ads 의 '광고 로드' 를 조절한다
-     (코드로는 제어할 수 없다).
-     ⚠ 퍼블리셔 ID 는 기존 포스트에 박혀 있던 값을 그대로 옮긴 것이다.
-        ads.txt 는 pub-8309763910216209 을 선언하고 있어 값이 다르다 — 확인 필요. -->
+     애드센스가 발급한 로더 코드. 퍼블리셔 ID 는 ads.txt 의
+     pub-8309763910216209 과 일치한다.
+     광고 위치·개수는 구글이 자동으로 정하므로 코드로 제어할 수 없다. 개수를
+     줄이려면 애드센스 대시보드 > 광고 > 사이트별 설정 > Auto ads 의
+     '광고 로드' 를 조절한다. -->
 {% if jekyll.environment == "production" %}
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1809380969362850"
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8309763910216209"
           crossorigin="anonymous"></script>
 {% endif %}
