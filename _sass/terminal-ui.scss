@@ -17,10 +17,11 @@ body { background: $bg; }
    ========================================================================== */
 
 .tframe {
-  border: 1px solid $line;
-  border-radius: 2px;
+  /* 바깥 테두리는 내부 구분선($line)보다 밝게 — 배경과 붙어 보이지 않게 한다 */
+  border: 1px solid $frame-line;
+  border-radius: 3px;
   background: $bg;
-  margin: 8px;
+  margin: 28px;
   /* overflow:hidden 금지 — .tpost__rail 의 position:sticky 가 깨진다 */
 
   /* 프레임 안쪽 여백은 각 섹션이 직접 관리한다 */
@@ -87,8 +88,13 @@ body { background: $bg; }
   color: #43474e;
 }
 
+/* 화면이 좁아질수록 바깥 여백을 줄인다 — 좁은 폭에서 본문이 눌리지 않게 */
+@media (max-width: 64em) {
+  .tframe { margin: 16px; }
+}
+
 @media (max-width: 37.5em) {
-  .tframe { margin: 6px; }
+  .tframe { margin: 8px; }
   .tframe .masthead__inner-wrap { padding: 0 18px; }
   .tframe #main { padding: 0 18px; }
   .tframe__foot { padding: 12px 18px; }
@@ -121,7 +127,9 @@ body { background: $bg; }
     align-self: center;
     white-space: nowrap;
 
-    @media (max-width: 37.5em) { display: none; }
+    /* greedy-nav 는 .visible-links 폭만 계산해서 이 프롬프트를 고려하지 않는다.
+       좁은 폭에서 내비 링크와 겹치므로(예: 768px 에서 CATEGORY 와 충돌) 숨긴다. */
+    @media (max-width: 64em) { display: none; }
   }
 
   .greedy-nav {
