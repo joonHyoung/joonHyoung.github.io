@@ -627,12 +627,25 @@ body.layout--single {
       p { color: #c9cdd4; }
     }
 
+    /* 인라인 코드 (본문 중간의 `code`) */
     code {
       font-family: $monospace-font-family;
       background: $bg-raised;
       color: $accent-dim;
       padding: 2px 5px;
       border-radius: 0;
+    }
+
+    /* ⚠ 위 규칙은 코드블록 안의 <code> 에도 걸린다.
+       rouge 는 <pre class="highlight"><code>…</code></pre> 를 만들고, 그 <code>
+       는 display:inline 이므로 배경이 줄마다 따로 칠해져 줄무늬처럼 보이고,
+       padding 2px 5px 때문에 들여쓰기까지 어긋난다. 코드블록 안에서는 되돌린다.
+       (색은 .highlight 의 토큰 클래스가 담당한다) */
+    pre code,
+    .highlight code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
     }
 
     div.highlighter-rouge, figure.highlight, pre.highlight {
