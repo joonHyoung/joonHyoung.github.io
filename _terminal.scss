@@ -312,20 +312,26 @@ code, pre, .highlight { font-family: $monospace-font-family; }
    _layouts/home.html + _includes/log-sidebar.html 전용
    ========================================================================== */
 
-.layout--home {
+body.layout--home {
   #main {
-    max-width: 1440px;
-    padding: 0 20px;
+    max-width: 1280px;
+    width: 100%;
+    padding: 0 32px;
     margin: 0 auto;
     float: none;
     clear: both;
   }
   .sidebar, .page__footer-follow, .archive__subtitle { display: none; }
-  .initial-content, .page__content { padding: 0; }
+  .initial-content, .page__content, .archive { padding: 0; margin: 0; width: 100%; float: none; }
+
+  @media (max-width: 37.5em) {
+    #main { padding: 0 14px; }
+  }
 }
 
 .tlog {
   border: 1px solid $line;
+  border-radius: 2px;
 
   a, a:visited, a:hover, a:focus {
     color: inherit;
@@ -334,7 +340,7 @@ code, pre, .highlight { font-family: $monospace-font-family; }
   }
   display: grid;
   grid-template-columns: 1fr 320px;
-  margin: 2em 0 3em;
+  margin: 2.5em 0 4em;
   font-family: $monospace-font-family;
 
   &__main { border-right: 1px solid $line; min-width: 0; }
