@@ -30,7 +30,18 @@ masthead_title           : # overrides the website title displayed in the masthe
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
 comments:
-  provider               : "disqus" # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "giscus", "custom"
+  # 현재 댓글 비활성화. false, "disqus", "discourse", "facebook", "staticman",
+  # "staticman_v2", "utterances", "giscus", "custom"
+  #
+  # Disqus 를 끈 이유: Disqus 위젯은 iframe 이라 사이트 CSS 가 닿지 않아
+  # 다크 배경 위에 흰 블록으로 렌더되고, 무료 플랜에서는 Disqus 자체
+  # "Sponsored" 광고가 댓글 위에 붙는다. 둘 다 코드로 제어할 수 없다.
+  # (_layouts/single.html 이 site.comments.provider 를 보고 분기하므로
+  #  이 값이 false 면 댓글 블록 자체가 출력되지 않는다.)
+  #
+  # 되돌리려면: "disqus" 로 바꾸면 shortname 이 그대로 남아 있어 즉시 복구된다.
+  # giscus 로 가려면: 아래 giscus 블록의 TODO 3개를 채우고 "giscus" 로 바꾼다.
+  provider               : false
   disqus:
     shortname            : "joonhyoung-github-io" # https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-
   discourse:
