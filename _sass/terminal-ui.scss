@@ -326,10 +326,14 @@ body.layout--home {
   grid-template-columns: 1fr 320px;
   font-family: $monospace-font-family;
 
+  /* ⚠ 여기에 border 관련 선언을 넣지 말 것.
+     `.tlog a`(특이도 0,1,1)는 `.tlog__tagchip`·`.tlog__btn`·`.tlog__row`
+     (0,1,0)를 이기므로, 예전의 `border-bottom: 0` 이 칩·버튼의 아래변과
+     목록 행 구분선을 지워버렸다. 테마에는 링크에 border-bottom 을 주는
+     규칙이 없어 애초에 리셋도 불필요하다. */
   a, a:visited, a:hover, a:focus {
     color: inherit;
     text-decoration: none;
-    border-bottom: 0;
   }
 
   &__main { border-right: 1px solid $line; min-width: 0; }
@@ -545,7 +549,8 @@ body.layout--single {
   display: grid;
   grid-template-columns: 1fr 260px;
 
-  a, a:visited, a:focus { border-bottom: 0; }
+  /* ⚠ `.tpost a` 에 border 리셋을 넣지 말 것 — .tpost__tag / __navcard / __btn
+     의 아래변이 지워진다 (.tlog 쪽 주석과 같은 이유). */
 
   &__main {
     border-right: 1px solid $line;
