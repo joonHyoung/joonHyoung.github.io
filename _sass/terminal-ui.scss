@@ -552,6 +552,15 @@ body.layout--single {
   /* ⚠ `.tpost a` 에 border 리셋을 넣지 말 것 — .tpost__tag / __navcard / __btn
      의 아래변이 지워진다 (.tlog 쪽 주석과 같은 이유). */
 
+  /* UI 성격의 링크(태그 칩·이전/다음 카드·버튼)는 밑줄을 없앤다.
+     테마에 전역 `a { text-decoration: none }` 이 없어 브라우저 기본 밑줄이
+     남는다. 홈(.tlog)은 링크 리셋에서 이미 처리돼 있어 서로 달라 보였다.
+     본문 링크(.tpost__body a)는 그대로 밑줄을 유지한다 — 글 속의 링크는
+     색만으로 구분하면 접근성이 떨어진다. */
+  &__tag,
+  &__navcard,
+  &__btn { text-decoration: none; }
+
   &__main {
     border-right: 1px solid $line;
     padding: 44px 64px 56px;
