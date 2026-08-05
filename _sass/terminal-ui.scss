@@ -481,6 +481,25 @@ body.layout--home {
 
     &:hover { border-color: $accent; color: $accent-dim; }
   }
+  /* 방문자 수 (GoatCounter) — 레일 최하단.
+     [hidden] 을 따로 지정하는 이유: .tlog__rail-group 의 display:flex 가
+     브라우저 기본 [hidden]{display:none} 을 이겨버려서 숨김이 먹지 않는다. */
+  &__stats {
+    border-top: 1px solid $line;
+    padding-top: 20px;
+
+    &[hidden] { display: none; }
+  }
+  &__stat {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78125rem;
+    color: #b9bdc4;
+
+    span:first-child { font-family: $global-font-family; }
+    span:last-child { color: #4d5259; }
+  }
+
   &__whoami {
     display: flex;
     flex-direction: column;

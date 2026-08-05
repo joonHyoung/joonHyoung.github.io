@@ -16,3 +16,10 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8309763910216209"
           crossorigin="anonymous"></script>
 {% endif %}
+
+<!-- GoatCounter — 방문자 집계. 숫자 표시는 홈 우측 레일의 STATS 섹션에서 한다.
+     production 에서만 실행해 로컬 빌드가 조회수를 올리지 않게 한다. -->
+{% if jekyll.environment == "production" and site.goatcounter %}
+  <script data-goatcounter="https://{{ site.goatcounter }}.goatcounter.com/count"
+          async src="https://gc.zgo.at/count.js"></script>
+{% endif %}
