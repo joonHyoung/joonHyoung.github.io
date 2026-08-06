@@ -42,9 +42,12 @@
       <div id="footer" class="page__footer">
         <footer>
           {% include footer/custom.html %}
+          {% comment %}
+            테마 크레딧("Jekyll · Minimal Mistakes")은 제거했다. MIT 고지는
+            LICENSE / LICENSE.txt 와 이 파일 상단 주석에 남아 있어 요건을 만족한다.
+          {% endcomment %}
           <div class="tframe__foot">
             <span>&copy; {{ site.time | date: "%Y" }} {{ site.name | default: site.title }}</span>
-            <span>Jekyll &middot; Minimal Mistakes</span>
           </div>
         </footer>
       </div>

@@ -63,7 +63,7 @@
 - `filter` 칩(all / 카테고리) + `sort: newest` 토글 — 클라이언트 JS로 동작
 - DATE / CAT / TITLE / READ 컬럼 헤더, 행 hover 하이라이트
 - 태그 소문자·공백 하이픈 처리, 요약문 줄간격 1.6
-- 하단 프레임 바(© / Jekyll · Minimal Mistakes)
+- 하단 프레임 바(© 저작권 표기)
 - 좌측 프로필 사이드바는 홈에서만 숨김 (`.layout--home .sidebar`)
 
 ### 주의
