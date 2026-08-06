@@ -99,7 +99,19 @@
         } catch (e) { /* Intl 미지원·형식 불일치 → 아래 폴백 */ }
         return localDate();
       }
+      /* GoatCounter 의 end 는 배타적이다. 실측으로 확인했다:
+           ?start=8/6&end=8/6  -> 0   (빈 구간)
+           ?start=8/6&end=8/7  -> 4   (8월 6일 하루)
+         그래서 '오늘 하루'는 [오늘, 내일) 로 요청해야 한다.
+         start 만 주면 의미상으론 같지만(오늘 이후 = 오늘), 그 URL 은 매일 자정에
+         새로 생겨서 그날 첫 요청의 0 이 캐시로 굳는 일이 있었다. */
+      function nextDay(ymd) {
+        var d = new Date(ymd + 'T00:00:00Z');   // 한국은 DST 가 없어 UTC 연산으로 안전
+        d.setUTCDate(d.getUTCDate() + 1);
+        return d.toISOString().slice(0, 10);
+      }
       var today = seoulDate();
+      var tomorrow = nextDay(today);
 
       /* 응답은 천단위가 좁은 공백으로 구분돼 온다("1 087 258") → 한국식 콤마로 */
       function fmt(v) {
@@ -112,7 +124,16 @@
           .catch(function () { return null; });
       }
 
-      Promise.all([get(base), get(base + '?start=' + today)]).then(function (r) {
+      /* 전체도 파라미터 없이 부르지 않는다. 파라미터 없는 응답은 실제 총계와
+         달랐다(실측: 파라미터 없음 8 vs ?start=2000-01-01 = 12 = 연 단위 범위와 일치).
+         아주 이른 날짜를 start 로 주면 의미가 명확하고, URL 이 고정이라
+         캐시도 정상적으로(4시간 주기) 갱신된다. */
+      var ALL_FROM = '2000-01-01';
+
+      Promise.all([
+        get(base + '?start=' + ALL_FROM),
+        get(base + '?start=' + today + '&end=' + tomorrow)
+      ]).then(function (r) {
         if (!r[0]) return;
         var total = fmt(r[0].count);
         if (total === null) return;
