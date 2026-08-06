@@ -191,7 +191,11 @@ footer:
 include:
   - .htaccess
   - _pages
-  - _posts
+  # ⚠ _posts 를 여기에 넣지 말 것.
+  # 포스트는 이미 Jekyll 컬렉션으로 permalink(/:categories/:title/)에 렌더된다.
+  # include 에 넣으면 _posts 가 일반 디렉터리로도 처리돼 같은 글이
+  # /_posts/<파일명>/ 에 한 번 더 발행된다(중복 URL). 게다가 그쪽 canonical 이
+  # 자기 자신을 가리켜 정규화도 되지 않아 검색엔진에는 별개 문서로 보인다.
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
@@ -219,6 +223,8 @@ exclude:
   - tmp
   - /docs # ignore Minimal Mistakes /docs
   - /test # ignore Minimal Mistakes /test
+  # 내부 문서 — 발행하면 /CLAUDE/ 와 /CLAUDE.md 가 공개·색인된다
+  - CLAUDE.md
 keep_files:
   - .git
   - .svn
