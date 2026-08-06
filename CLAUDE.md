@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A personal blog (Korean locale, "Redsnow's Anything Blog") built on the **Minimal Mistakes** Jekyll theme and deployed to **GitHub Pages** at https://joonhyoung.github.io. The repository is a full copy of the theme gem, so the theme's own gemspec, `docs/`, and `test/` directories live at the root alongside the actual site content. `docs/` and `test/` are excluded from the build (`exclude:` in `_config.yml`) — they are theme source/examples, not this site.
+A personal blog (Korean locale, "Redsnow's Anything Blog") built on the **Minimal Mistakes** Jekyll theme and deployed to **GitHub Pages** at https://joonhyoung.github.io.
+
+This repository used to be a full copy of the Minimal Mistakes theme gem. The upstream scaffolding (`docs/`, `test/`, `CHANGELOG.md`, both `.gemspec` files, `Rakefile`, theme screenshots, `staticman.yml`) was removed — it was ~28 MB of the repo and none of it reached the build. What remains from the theme are the vendored `_layouts/`, `_includes/`, `_sass/` and `assets/` copies that the site actually renders from. Unused theme layouts and includes were pruned at the same time; recover any of it from git history if a feature (e.g. a dedicated search page, image galleries) is added later.
 
 ## Commands
 
@@ -26,7 +28,9 @@ npm run build:js
 npm run watch:js
 ```
 
-There is no lint step and no site-level test suite — the `test/` directory belongs to the upstream theme, not this blog.
+There is no lint step and no test suite.
+
+The root `Gemfile` mirrors the CI `.github/Gemfile` (both use the `github-pages` metagem), so a local build matches production — verified by diffing the two builds' file lists. It previously contained only `gemspec`, which failed outright because two `.gemspec` files sat at the root; local development was impossible until that was fixed.
 
 ## Authoring content
 
@@ -39,11 +43,8 @@ There is no lint step and no site-level test suite — the `test/` directory bel
 ## Key configuration facts
 
 - **Deployment: GitHub Actions** (`.github/workflows/pages.yml`) — builds with Bundler using the CI-only `.github/Gemfile` (the `github-pages` metagem) and deploys via `actions/deploy-pages`. This requires **Settings → Pages → Build and deployment → Source = "GitHub Actions"**; if that setting is ever reset to "Deploy from a branch", the workflow's deploy step will fail. The CI Gemfile is separate from the root `Gemfile` (which is what local `bundle exec jekyll serve` uses). Confirm build status at https://github.com/joonHyoung/joonHyoung.github.io/actions.
-- Historical note: before the Actions workflow, the site used the default (legacy) `--safe` Pages build, which only accepts whitelisted themes — that is why the `theme: jekyll-theme-hacker` hack below existed. With the Actions build it is no longer strictly required, but it is kept for safety and does no harm.
-- Theme config in `_config.yml` is deliberately layered and **must not be "cleaned up"**:
-  - `remote_theme: mmistakes/minimal-mistakes` — provides the actual site appearance (jekyll-remote-theme is auto-enabled on GitHub Pages).
-  - `theme: minimal-mistakes-jekyll` — the local gem, used only by `bundle exec jekyll serve`.
-  - `theme: jekyll-theme-hacker` (last line) — **load-bearing.** The safe Pages build rejects any `theme:` not on GitHub's supported-theme whitelist; `minimal-mistakes-jekyll` is NOT on it, but `jekyll-theme-hacker` IS. This trailing line overrides the gem `theme:` so the build passes. Removing it breaks the Pages build (verified 2026-07-23). The proper long-term fix is a GitHub Actions workflow that runs `bundle exec jekyll build`, which would let `theme: minimal-mistakes-jekyll` work directly and make this hack unnecessary.
+- **Theme resolution: `remote_theme: mmistakes/minimal-mistakes` only.** Both `theme:` lines in `_config.yml` are commented out and the vendored theme gemspec has been deleted, so no gem theme is involved. In practice the appearance comes almost entirely from the local `_layouts/`, `_includes/` and `_sass/` copies, which shadow the remote theme.
+  - Historical note: the legacy `--safe` Pages build only accepted whitelisted themes, which is why a `theme: jekyll-theme-hacker` line used to be load-bearing. The Actions workflow removed that constraint, and the line is now commented out. Do not reintroduce a `theme:` key without checking that it does not fight `remote_theme`.
 - The home page is `index.html` (`layout: home`, `author_profile: true`). Previously duplicated as `index.md`/`index.markdown` — keep a single index file.
 - Comments: Disqus (`joonhyoung-github-io`). Search: lunr with full-content indexing. Analytics: Google gtag (`G-R6WK8J8QD8`).
 - Site skin is `air` (`minimal_mistakes_skin`); customize styling under `_sass/`.

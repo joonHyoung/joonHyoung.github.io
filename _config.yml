@@ -208,7 +208,6 @@ exclude:
   - assets/js/_main.js
   - assets/js/vendor
   - Capfile
-  - CHANGELOG
   - config
   - Gemfile
   - Gruntfile.js
@@ -218,11 +217,11 @@ exclude:
   - node_modules
   - package.json
   - package-lock.json
-  - Rakefile
   - README
   - tmp
-  - /docs # ignore Minimal Mistakes /docs
-  - /test # ignore Minimal Mistakes /test
+  # npm run build:js 에 필요해서 파일은 남기되 발행은 막는다
+  # (assets/js/plugins, assets/js/vendor, assets/js/_main.js 도 같은 이유로 위에 있음)
+  - banner.js
   # 내부 문서 — 발행하면 /CLAUDE/ 와 /CLAUDE.md 가 공개·색인된다
   - CLAUDE.md
 keep_files:
