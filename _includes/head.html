@@ -3,7 +3,12 @@
 {% include seo.html %}
 
 {% unless site.atom_feed.hide %}
-  <link href="{% if site.atom_feed.path %}{{ site.atom_feed.path }}{% else %}{{ '/feed.xml' | relative_url }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ site.title }} Feed">
+  {% comment %}
+    /feed.xml 은 루트의 정적 파일이며 RSS 2.0 이다(<rss version="2.0">).
+    테마 기본값은 type 을 application/atom+xml 로 선언했는데 실제 형식과 달라
+    application/rss+xml 로 바로잡았다.
+  {% endcomment %}
+  <link href="{% if site.atom_feed.path %}{{ site.atom_feed.path }}{% else %}{{ '/feed.xml' | relative_url }}{% endif %}" type="application/rss+xml" rel="alternate" title="{{ site.title }} RSS">
 {% endunless %}
 
 <!-- https://t.co/dKP3o1e -->

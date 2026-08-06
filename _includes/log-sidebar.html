@@ -55,7 +55,8 @@
       {% for link in site.author.links %}
         {% if link.url %}<a class="tlog__btn" href="{{ link.url }}" rel="nofollow noopener">{{ link.label }}</a>{% endif %}
       {% endfor %}
-      <a class="tlog__btn" href="{{ '/feed.xml' | relative_url }}">Feed</a>
+      {% comment %} /feed.xml 은 RSS 2.0 피드다. 라벨을 RSS 로 두어 알아보기 쉽게 한다 {% endcomment %}
+      <a class="tlog__btn" href="{{ '/feed.xml' | relative_url }}">RSS</a>
     </div>
   </div>
 
