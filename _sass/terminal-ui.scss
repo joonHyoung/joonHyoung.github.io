@@ -588,6 +588,17 @@ body.layout--single {
     border-right: 1px solid $line;
     padding: 44px 64px 56px;
     min-width: 0;
+
+    /* 본문 컬럼을 하나로 통일하고 가운데 정렬한다.
+       이전에는 __body 와 __nav 만 740px 로 잘려 왼쪽에 붙고, __meta·__title·
+       __tags 는 영역 전체(938px)를 써서 본문만 왼쪽으로 치우쳐 보이고
+       오른쪽에 200px 가까운 빈 공간이 남았다.
+       세로 여백은 각 요소가 이미 정하므로 좌우만 auto 로 둔다. */
+    > * {
+      max-width: $post-measure;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 
   &__meta {
@@ -608,14 +619,15 @@ body.layout--single {
     line-height: 1.4;
     letter-spacing: -0.025em;
     color: #f2f3f5;
-    margin: 0 0 22px;
+    margin-top: 0;
+    margin-bottom: 22px; // 단축 속성을 쓰면 .tpost__main > * 의 좌우 auto 가 덮여 가운데 정렬이 깨진다
     text-wrap: pretty;
   }
 
   /* 본문 */
   &__body {
     font-family: $global-font-family;
-    max-width: 740px;
+    max-width: $post-measure;
 
     p, li {
       font-size: 1rem;
@@ -687,7 +699,7 @@ body.layout--single {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin: 34px 0 0;
+    margin-top: 34px; // 위와 같은 이유로 단축 속성 대신 세로만 지정
   }
   &__tag {
     font-size: 0.6875rem;
@@ -706,7 +718,7 @@ body.layout--single {
     border-top: 1px solid $line;
     margin-top: 34px;
     padding-top: 22px;
-    max-width: 740px;
+    max-width: $post-measure;
   }
   &__navcard {
     display: flex;
