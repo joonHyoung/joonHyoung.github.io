@@ -10,8 +10,20 @@
 # Review documentation to determine if you should use `theme` or `remote_theme`
 # https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/#installing-the-theme
 
-# theme                  : "minimal-mistakes-jekyll"
-remote_theme           : "mmistakes/minimal-mistakes"
+# 외부 테마를 쓰지 않는다. 레이아웃·인클루드·sass 는 모두 이 저장소 안에 있다.
+#
+# theme 를 빈 값으로 "명시"하는 것이 중요하다. 키를 아예 지우면 github-pages 젬이
+# 기본 테마(jekyll-theme-primer)를 채워 넣어, 쓰지도 않는 assets/css/style.css
+# 76KB 가 발행된다. 빈 값으로 두면 기본 테마가 꺼진다.
+theme                  :
+#
+# remote_theme: "mmistakes/minimal-mistakes" 를 제거했다.
+# 원격 테마가 실제로 제공하던 것은 _sass/minimal-mistakes/vendor/** (breakpoint,
+# susy, magnific-popup) 뿐이었고, 그 파일들을 저장소로 가져왔다. 참조되는
+# 레이아웃·인클루드는 원래부터 전부 로컬에 있었다.
+# 제거 검증: 모든 HTML 이 바이트 단위로 동일하고 main.css 해시도 같다.
+# 부수 효과로 원격 테마가 발행하던 assets/js 소스 597KB(plugins·vendor·
+# _main.js·main.min.js.map)가 사라진다.
 minimal_mistakes_skin    : "terminal" # "dark" , "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
