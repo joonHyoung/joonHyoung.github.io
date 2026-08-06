@@ -2,7 +2,9 @@ _site
 .sass-cache
 .jekyll-cache
 .jekyll-metadata
-vendor
+# bundler 설치 경로(루트)만 무시한다. 슬래시 없이 쓰면 하위 경로의 vendor 까지
+# 전부 걸려서 _sass/minimal-mistakes/vendor (빌드에 필수) 가 커밋되지 않는다.
+/vendor
 assets/js/.DS_Store
 .DS_Store
 assets/.DS_Store
