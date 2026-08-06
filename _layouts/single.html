@@ -19,18 +19,30 @@ layout: default
   {% if page.date %}<meta itemprop="datePublished" content="{{ page.date | date_to_xmlschema }}">{% endif %}
 
   <div class="tpost__main">
-    <div class="tpost__meta">
-      <span class="is-cat">{{ post_cat }}/</span>
-      <span>{{ page.date | date: "%Y-%m-%d" }}</span>
-      <span>·</span>
-      <span>{% if words < wpm %}1분{% else %}{{ words | divided_by: wpm }}분{% endif %} 소요</span>
-      {% if series_idx %}
-        <span>·</span>
-        <span>series {{ series_idx }}/{{ series_total }}</span>
-      {% endif %}
-    </div>
+    {% comment %}
+      상단 히어로 배너. 이미지가 아니라 HTML/CSS 로 그린다.
+      제목·라벨·날짜가 front matter 에서 바로 오므로 글마다 항상 정확하고,
+      글자가 선명하며 좁은 화면에서도 잘리지 않는다. 생성 단계도 필요 없다.
+      (header.image 의 PNG 는 og:image 로 계속 쓰인다 — seo.html 담당)
+    {% endcomment %}
+    <header class="tpost__hero">
+      <div class="tpost__hero-inner">
+        <div class="tpost__hero-label">{{ page.strapline | default: post_cat | upcase }}</div>
 
-    <h1 id="page-title" class="tpost__title p-name" itemprop="headline">{{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}</h1>
+        <h1 id="page-title" class="tpost__title p-name" itemprop="headline">{{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}</h1>
+
+        <div class="tpost__meta">
+          <span class="is-cat">{{ post_cat }}/</span>
+          <span>{{ page.date | date: "%Y-%m-%d" }}</span>
+          <span>·</span>
+          <span>{% if words < wpm %}1분{% else %}{{ words | divided_by: wpm }}분{% endif %} 소요</span>
+          {% if series_idx %}
+            <span>·</span>
+            <span>series {{ series_idx }}/{{ series_total }}</span>
+          {% endif %}
+        </div>
+      </div>
+    </header>
 
     <div class="tpost__body e-content" itemprop="text">
       {{ content }}

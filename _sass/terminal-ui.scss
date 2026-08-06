@@ -601,6 +601,41 @@ body.layout--single {
     }
   }
 
+  /* 상단 히어로 배너 (이미지가 아니라 HTML/CSS).
+     .tpost__main 의 패딩을 음수 margin 으로 상쇄해 좌우 가장자리까지 채우고,
+     안쪽 wrapper 가 본문과 같은 컬럼($post-measure)에 맞춰 정렬한다.
+     ⚠ 음수 margin 값은 .tpost__main 의 padding 과 짝이다. 한쪽만 바꾸면 어긋난다. */
+  &__hero {
+    max-width: none;
+    margin: -44px -64px 44px;
+    padding: 52px 64px 44px;
+    background:
+      radial-gradient(120% 140% at 0% 0%, rgba($accent, 0.10), transparent 60%),
+      $bg-raised;
+    border-bottom: 1px solid $line;
+  }
+  &__hero-inner {
+    max-width: $post-measure;
+    margin: 0 auto;
+  }
+  &__hero-label {
+    font-size: 0.625rem;
+    letter-spacing: 0.18em;
+    color: $accent;
+
+    &:after {
+      content: "";
+      display: block;
+      width: 44px;
+      height: 2px;
+      background: $accent;
+      margin-top: 10px;
+    }
+  }
+  /* 히어로 안에서는 제목·메타의 세로 여백을 배너 리듬에 맞춘다 */
+  &__hero .tpost__title { margin-top: 18px; margin-bottom: 16px; }
+  &__hero .tpost__meta  { margin-bottom: 0; }
+
   &__meta {
     display: flex;
     flex-wrap: wrap;
@@ -835,11 +870,14 @@ body.layout--single {
 @media (max-width: 64em) {
   .tpost { grid-template-columns: 1fr; }
   .tpost__main { border-right: 0; border-bottom: 1px solid $line; padding: 34px 28px 40px; }
+  /* 히어로 음수 margin 은 위 padding 과 짝 */
+  .tpost__hero { margin: -34px -28px 34px; padding: 40px 28px 32px; }
   .tpost__rail { position: static; padding: 26px 28px 34px; }
 }
 
 @media (max-width: 37.5em) {
   .tpost__main { padding: 26px 18px 32px; }
+  .tpost__hero { margin: -26px -18px 28px; padding: 32px 18px 26px; }
   .tpost__title { font-size: 1.5rem; }
   .tpost__nav { grid-template-columns: 1fr; }
   .tpost__navcard.is-next { text-align: left; }
