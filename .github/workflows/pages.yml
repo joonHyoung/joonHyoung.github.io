@@ -3,6 +3,21 @@ name: Build and deploy Jekyll site to Pages
 on:
   push:
     branches: ["main"]
+
+  # 안전망: 매일 한 번 무조건 빌드한다.
+  #
+  # '오늘의 AI 뉴스' 자동 발행이 커밋을 main 에 올려도 배포가 안 되는 일이 있었다
+  # (2026-08-07, 커밋 5534e68). GitHub 는 기본 GITHUB_TOKEN 으로 만든 푸시에
+  # 대해서는 무한 루프 방지를 위해 push 이벤트를 발생시키지 않기 때문이다.
+  # 그 경우 손으로 깨우기 전까지 사이트가 계속 옛 상태로 남는다.
+  #
+  # cron 은 UTC 기준. 21:00 UTC = 06:00 KST — 자동 발행이 보통 05:00 KST 대에
+  # 커밋하므로 그 직후에 걸린다. 트리거를 놓쳐도 하루 안에 스스로 복구된다.
+  # 참고: GitHub 스케줄은 혼잡 시 수 분~수십 분 지연될 수 있고, 저장소가 60일간
+  #       활동이 없으면 자동 비활성화된다(이 저장소는 매일 커밋되므로 해당 없음).
+  schedule:
+    - cron: "0 21 * * *"
+
   workflow_dispatch:
 
 # Permissions required by actions/deploy-pages
