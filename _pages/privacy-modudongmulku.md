@@ -16,7 +16,7 @@ author_profile: false
 오류 개선을 위해 다음 정보를 자동으로 수집할 수 있습니다.
 
 - 기기 정보(기기 모델, 운영체제 버전, 언어·국가 설정)
-- 광고 식별자(Android 광고 ID, iOS IDFA) 및 앱 인스턴스 ID
+- 광고 식별자(Android 광고 ID) 및 앱 인스턴스 ID
 - 앱 이용 기록(앱 실행, 화면 조회, 이용 시간 등)
 - 앱 오류·비정상 종료 정보
 - IP 주소 및 이를 통해 추정되는 대략적 위치
@@ -35,7 +35,6 @@ author_profile: false
 본 서비스는 Google AdMob을 통해 광고를 게재합니다.
 
 - AdMob은 광고 식별자 등 기기 정보를 이용하여 사용자의 관심사에 기반한 맞춤 광고를 게재할 수 있습니다.
-- iOS에서는 앱 추적 투명성(ATT) 요청에 동의한 경우에만 광고 식별자(IDFA)가 사용됩니다.
 - 자세한 내용은 [Google 개인정보처리방침](https://policies.google.com/privacy) 및
   [Google의 파트너 사이트 데이터 사용 방식](https://policies.google.com/technologies/partner-sites)을 참고하세요.
 
@@ -64,8 +63,7 @@ Crashlytics 등)를 사용합니다. Firebase가 수집하는 정보는
 
 ## 6. 이용자의 권리
 
-- **맞춤 광고 거부:** Android는 *설정 → Google → 광고*에서 광고 ID를 삭제하거나 재설정할 수 있고,
-  iOS는 *설정 → 개인정보 보호 및 보안 → 추적*에서 앱의 추적 요청을 거부할 수 있습니다.
+- **맞춤 광고 거부:** 기기의 *설정 → Google → 광고*에서 광고 ID를 삭제하거나 재설정할 수 있습니다.
 - **수집 중단:** 앱을 삭제하면 더 이상 정보가 수집되지 않습니다.
 
 ## 7. 문의
