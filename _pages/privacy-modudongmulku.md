@@ -20,9 +20,11 @@ author_profile: false
 - 앱 이용 기록(앱 실행, 화면 조회, 이용 시간 등)
 - 앱 오류·비정상 종료 정보
 - IP 주소 및 이를 통해 추정되는 대략적 위치
+- 인앱 결제 시 구매 기록(구매한 상품, 주문 번호, 구매 시각)
 
 ## 2. 정보의 이용 목적
 
+- 인앱 결제 상품(광고 제거, 힌트 팩) 제공 및 구매 내역 확인·복원
 - 광고 게재 및 광고 성과 측정
 - 앱 이용 통계 분석을 통한 서비스 개선
 - 오류 진단 및 안정성 향상
@@ -41,6 +43,15 @@ author_profile: false
 본 서비스는 이용 통계 분석 및 오류 진단을 위해 Google Firebase(Google Analytics for Firebase,
 Crashlytics 등)를 사용합니다. Firebase가 수집하는 정보는
 [Firebase 개인정보 보호 안내](https://firebase.google.com/support/privacy)에서 확인할 수 있습니다.
+
+### Google Play 결제
+본 서비스는 광고 제거, 힌트 팩 등 인앱 결제 상품을 Google Play 결제 시스템을 통해 판매합니다.
+
+- 결제는 Google Play에서 처리되며, 운영자는 카드 번호 등 결제 수단 정보를 받거나 저장하지 않습니다.
+- 구매 기록(구매한 상품, 주문 번호, 구매 시각)은 구매한 상품을 제공하고 재설치 시 구매 내역을
+  복원하는 데에만 사용됩니다.
+- 결제 및 환불은 [Google Play 이용약관](https://play.google.com/about/play-terms/)과
+  [Google 개인정보처리방침](https://policies.google.com/privacy)에 따릅니다.
 
 ## 4. 개인정보의 국외 이전
 
