@@ -1,0 +1,32 @@
+---
+layout: null
+permalink: /llms.txt
+sitemap: false
+---
+{%- assign news = site.posts | where: "series", "오늘의 AI 뉴스" -%}
+{%- assign articles = site.posts | where_exp: "post", "post.series != '오늘의 AI 뉴스'" -%}
+# {{ site.title }}
+
+> {{ site.description }}
+
+{{ site.url }} 은 모바일 개발자 {{ site.author.name }}의 한국어 개인 블로그입니다. iOS·Swift 개발 노트와 매일 아침(KST) 발행되는 AI 업계 소식 요약 "오늘의 AI 뉴스"를 다룹니다. 모든 글은 한국어로 작성됩니다.
+
+## 개발 글
+{% for post in articles %}
+- [{{ post.title | strip_html | strip_newlines }}]({{ post.url | absolute_url }}){% if post.description %}: {{ post.description | strip_html | strip_newlines }}{% endif %}
+{%- endfor %}
+
+## 오늘의 AI 뉴스 (최근 30개)
+{% for post in news limit: 30 %}
+- [{{ post.title | strip_html | strip_newlines }}]({{ post.url | absolute_url }}){% if post.description %}: {{ post.description | strip_html | strip_newlines }}{% endif %}
+{%- endfor %}
+
+이전 글 전체 목록: {{ '/year-archive/' | absolute_url }}
+
+## 사이트 정보
+
+- [About]({{ '/about/' | absolute_url }}): 블로그 운영자 소개
+- [카테고리별 글]({{ '/categories/' | absolute_url }})
+- [태그별 글]({{ '/tags/' | absolute_url }})
+- [RSS 피드]({{ '/feed.xml' | absolute_url }})
+- [개인정보처리방침]({{ '/privacy/' | absolute_url }})
