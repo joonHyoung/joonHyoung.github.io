@@ -51,6 +51,21 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
 
+      # 글별 공유 이미지(og:image) 생성 → assets/images/og/ (.github/scripts/og_images.py 참고)
+      # 실패해도 배포는 계속한다. 그 경우 seo.html 이 기존 header.image 로 돌아간다.
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate OG images
+        continue-on-error: true
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          pip install --quiet pillow
+          python .github/scripts/og_images.py
+
       - name: Build with Jekyll
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:

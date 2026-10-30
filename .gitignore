@@ -9,3 +9,6 @@ assets/js/.DS_Store
 .DS_Store
 assets/.DS_Store
 assets/.DS_Store
+
+# 배포 워크플로가 빌드 때마다 생성한다 (.github/scripts/og_images.py)
+/assets/images/og/

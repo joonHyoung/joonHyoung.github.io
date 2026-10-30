@@ -32,7 +32,21 @@
   {%- assign author_twitter = author.twitter | replace: "@", "" -%}
 {%- endif -%}
 
-{%- assign page_large_image = page.header.og_image | default: page.header.overlay_image | default: page.header.image | absolute_url -%}
+{%- comment -%}
+  배포 워크플로가 만든 글별 공유 이미지(.github/scripts/og_images.py)가 있으면 그걸 쓴다.
+  로컬 빌드처럼 파일이 없으면 기존 header 이미지로 돌아간다.
+{%- endcomment -%}
+{%- assign og_generated = nil -%}
+{%- assign og_generated_url = nil -%}
+{%- if page.collection == "posts" -%}
+  {%- assign og_generated_path = page.path | split: "/" | last | replace: ".md", ".png" | prepend: "/assets/images/og/" -%}
+  {%- assign og_generated = site.static_files | where: "path", og_generated_path | first -%}
+{%- endif -%}
+{%- if og_generated -%}
+  {%- assign og_generated_url = og_generated_path -%}
+{%- endif -%}
+
+{%- assign page_large_image = page.header.og_image | default: og_generated_url | default: page.header.overlay_image | default: page.header.image | absolute_url -%}
 {%- assign page_large_image = page_large_image | escape -%}
 
 {%- assign page_teaser_image = page.header.teaser | default: site.og_image | absolute_url -%}
@@ -138,7 +152,7 @@
 </script>
 
 {% if page.collection == "posts" %}
-  {%- assign ld_image = page.header.og_image | default: page.header.overlay_image | default: page.header.image | default: page.header.teaser | default: site.og_image | absolute_url -%}
+  {%- assign ld_image = page.header.og_image | default: og_generated_url | default: page.header.overlay_image | default: page.header.image | default: page.header.teaser | default: site.og_image | absolute_url -%}
   {%- assign ld_modified = page.last_modified_at | default: page.date -%}
 <script type="application/ld+json">
   {

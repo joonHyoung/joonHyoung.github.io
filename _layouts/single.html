@@ -56,6 +56,59 @@ layout: default
       </div>
     {% endif %}
 
+    {% comment %}
+      관련 글: 태그가 겹치는 글을 최대 4개. 거의 모든 글에 붙는 태그(AI, AI News,
+      OpenAI 등)로 묶으면 그냥 최신 글 목록이 되므로, 태그가 붙은 글 수로 가중치를 준다.
+        20개 이하 → 3점 · 45개 이하 → 1점 · 그보다 흔하면 0점
+      3점 이상인 글만, 점수 높은 순 → 최신 순으로 고른다.
+    {% endcomment %}
+    {% assign rel_strong = "" | split: "" %}
+    {% assign rel_weak = "" | split: "" %}
+    {% for t in page.tags %}
+      {% assign tag_count = site.tags[t] | size %}
+      {% if tag_count <= 20 %}
+        {% assign rel_strong = rel_strong | push: t %}
+      {% elsif tag_count <= 45 %}
+        {% assign rel_weak = rel_weak | push: t %}
+      {% endif %}
+    {% endfor %}
+    {% assign rel_keys = "" | split: "" %}
+    {% for p in site.posts %}
+      {% if p.url != page.url %}
+        {% assign score = 0 %}
+        {% for t in p.tags %}
+          {% if rel_strong contains t %}
+            {% assign score = score | plus: 3 %}
+          {% elsif rel_weak contains t %}
+            {% assign score = score | plus: 1 %}
+          {% endif %}
+        {% endfor %}
+        {% if score >= 3 %}
+          {% comment %} 정렬 키 "<1000-점수>-<10000+순번>": 문자열 오름차순 = 점수 높은 순, 같으면 최신 순 {% endcomment %}
+          {% assign rel_idx = forloop.index0 | plus: 10000 %}
+          {% assign rel_key = 1000 | minus: score | append: "-" | append: rel_idx %}
+          {% assign rel_keys = rel_keys | push: rel_key %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    {% assign rel_keys = rel_keys | sort %}
+
+    {% if rel_keys.size > 0 %}
+      <div class="tpost__related">
+        <div class="tpost__label">RELATED</div>
+        <div class="tpost__related-list">
+          {% for key in rel_keys limit: 4 %}
+            {% assign rel_idx = key | split: "-" | last | minus: 10000 %}
+            {% assign rp = site.posts[rel_idx] %}
+            <a class="tpost__navcard" href="{{ rp.url | relative_url }}">
+              <em>{{ rp.date | date: "%Y-%m-%d" }}</em>
+              <span>{{ rp.title }}</span>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
     {% if page.previous or page.next %}
       <div class="tpost__nav">
         {% if page.previous %}

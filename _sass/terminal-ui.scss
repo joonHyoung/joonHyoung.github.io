@@ -745,6 +745,22 @@ body.layout--single {
     &:hover { border-color: $accent; color: $accent-dim; }
   }
 
+  /* 관련 글 — 카드는 이전/다음의 __navcard 를 그대로 쓴다 */
+  &__related {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    border-top: 1px solid $line;
+    margin-top: 34px;
+    padding-top: 22px;
+    max-width: $post-measure;
+  }
+  &__related-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
   /* 이전 / 다음 */
   &__nav {
     display: grid;
@@ -879,7 +895,8 @@ body.layout--single {
   .tpost__main { padding: 26px 18px 32px; }
   .tpost__hero { margin: -26px -18px 28px; padding: 32px 18px 26px; }
   .tpost__title { font-size: 1.5rem; }
-  .tpost__nav { grid-template-columns: 1fr; }
+  .tpost__nav,
+  .tpost__related-list { grid-template-columns: 1fr; }
   .tpost__navcard.is-next { text-align: left; }
 }
 
