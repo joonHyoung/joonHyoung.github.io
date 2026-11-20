@@ -21,6 +21,8 @@ sidebar-categories:
     children:
       - title: "AI"
         url: /categories/#ai
+      - title: "AI Skills"
+        url: /categories/#ai-skills
       - title: "Apple"
         url: /categories/#apple
       - title: "Swift"
